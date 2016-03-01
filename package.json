@@ -1,0 +1,27 @@
+{
+  "name": "gauntlet-joe-z-and-the-pussycats",
+  "version": "1.0.0",
+  "description": "Time to use protypal inheritance to build a game.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nss-day-cohort-12/gauntlet-joe-z-and-the-pussycats.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nss-day-cohort-12/gauntlet-joe-z-and-the-pussycats/issues"
+  },
+  "homepage": "https://github.com/nss-day-cohort-12/gauntlet-joe-z-and-the-pussycats#readme",
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "gulp": "^3.9.1",
+    "gulp-jshint": "^2.0.0",
+    "gulp-watch": "^4.3.5",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0"
+  }
+}
