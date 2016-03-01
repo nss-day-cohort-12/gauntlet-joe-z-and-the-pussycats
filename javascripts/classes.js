@@ -12,6 +12,7 @@ Gauntlet.GuildHall.PlayerClass = function() {
   this.healthBonus = 0;
   this.strengthBonus = 0;
   this.intelligenceBonus = 0;
+  this.agilityBonus = 0;
   this.magical = false;
 
   this.toString = function() {
@@ -123,4 +124,38 @@ Gauntlet.GuildHall.Sorcerer.prototype = new Gauntlet.GuildHall.Mage();
       - Ninja
       - Assassin
  */
+
+Gauntlet.GuildHall.Eluder = function() {
+  this.name = "Eluder";
+  this.magical = false;
+  this.agilityBonus = this.agilityBonus + 10;
+  this.intelligenceBonus = this.intelligenceBonus + 35;
+};
+
+Gauntlet.GuildHall.Eluder.prototype = new Gauntlet.GuildHall.PlayerClass();
+
+Gauntlet.GuildHall.Thief = function() {
+  this.name = "Thief";
+  this.agilityBonus = this.agilityBonus + 5;
+  this.intelligenceBonus = this.intelligenceBonus + 10;
+};
+Gauntlet.GuildHall.Thief.prototype = new Gauntlet.GuildHall.Eluder();
+
+
+Gauntlet.GuildHall.Ninja = function() {
+  this.name = "Ninja";
+  this.agilityBonus = this.agilityBonus + 20;
+  this.intelligenceBonus = this.intelligenceBonus + 5;
+};
+Gauntlet.GuildHall.Ninja.prototype = new Gauntlet.GuildHall.Eluder();
+
+
+Gauntlet.GuildHall.Assassin = function() {
+  this.name = "Assassin";
+  this.agilityBonus = this.agilityBonus + 10;
+  this.healthBonus = this.healthBonus - 5;
+  this.intelligenceBonus = this.intelligenceBonus + 5;
+};
+Gauntlet.GuildHall.Assassin.prototype = new Gauntlet.GuildHall.Eluder();
+
 
