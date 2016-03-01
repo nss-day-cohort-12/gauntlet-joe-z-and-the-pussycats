@@ -1,0 +1,21 @@
+{
+  "name": "gauntlet-joe-z-and-the-pussycats",
+  "homepage": "https://github.com/nss-day-cohort-12/gauntlet-joe-z-and-the-pussycats",
+  "authors": [
+    "shupac800 <davidshuman@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.1"
+  }
+}
