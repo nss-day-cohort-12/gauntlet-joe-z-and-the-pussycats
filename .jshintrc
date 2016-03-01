@@ -1,0 +1,7 @@
+{
+  "esversion":6,
+  "devel":true,
+  "jquery":true,
+  "jasmine":true,
+  "browserify":true
+}
