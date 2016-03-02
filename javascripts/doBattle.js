@@ -1,11 +1,18 @@
 function doBattle(P1,P2) {
   // P1 is the player's character
   report(`You are ${P1.playerName}, a ${P1.skinColor} skinned ${P1.species} ${P1.class.name} with ${P1.health} health.`);
+  if (P1.class.magical) {
+    report(`${P1.playerName} is able to cast ${P1.weapon.name} of ${P1.weapon.type}!`);
+  } else {
+    report(`${P1.playerName} is wielding a nasty ${P1.weapon.name}!`);
+  }
   // P2 is the monster
   report(`Your opponent is ${P2.playerName}, a ${P2.skinColor} skinned ${P2.species} ${P2.class.name} with ${P2.health} health.`);
-
-  // function "report" outputs string to the appropriate DOM element
-  textOutput = [];
+  if (P2.class.magical) {
+    report(`${P2.playerName} is able to cast ${P2.weapon.name} of ${P2.weapon.type}!`);
+  } else {
+    report(`${P2.playerName} is wielding a nasty ${P2.weapon.name}!`);
+  }
 
   report("It's on!!!");
 
@@ -37,7 +44,7 @@ function attack(attacker,defender) {
   if (attacker.class.magical) {
     report(`${attacker.playerName} casts a ${attacker.weapon.name} of ${attacker.weapon.type}...`);
   } else {
-    report(`${attacker.playerName} lunges with his ${attacker.weapon.name}...`);
+    report(`${attacker.playerName} lunges with ${attacker.possessivePronoun} ${attacker.weapon.name}...`);
   }
 
   // does defender successfully evade?
@@ -47,7 +54,7 @@ function attack(attacker,defender) {
   }
 
   // defender takes damage
-  var damage = attacker.weapon.damage;  // base damage
+  var damage = Math.floor(Math.random() * attacker.weapon.damage + 1);  // base damage
   if (attacker.class.magical) {
     damage += Math.round(damage * attacker.intelligence / 50);  // damage adjustment
     report(`and does ${damage} points of damage!`);
@@ -65,9 +72,9 @@ function attack(attacker,defender) {
   // did defender die?
   if (defender.health <= 0) {
     report(`${attacker.playerName} has defeated ${defender.playerName}!`);
-    return false;
+    return false;  // don't do another attack -- it's over!
   } else {
-    return true;
+    return true;  // doAnotherAttack = true
   }
 }
 
@@ -76,9 +83,6 @@ function rollDice() {
 }
 
 function report(text) {
+  // in final version, supplement this ffunction with output to DOM element
   console.log(text);
 }
-
-// in final version,
-// create P1 based on user input and random values
-
