@@ -31,3 +31,38 @@ Gauntlet.SpellBook.Sphere = function() {
   this.type = this.damageTypes[random];
 };
 Gauntlet.SpellBook.Sphere.prototype = new Gauntlet.SpellBook.Spell();
+
+/*
+  An elemental sphere that can be cast by a magical class
+ */
+Gauntlet.SpellBook.Cube = function() {
+  this.name = "cube";
+  this.damage = Math.floor(Math.random() * 10 + 10);
+
+  var random = Math.round(Math.random() * (this.damageTypes.length - 1));
+  this.type = this.damageTypes[random];
+};
+Gauntlet.SpellBook.Cube.prototype = new Gauntlet.SpellBook.Spell();
+/*
+  An elemental sphere that can be cast by a magical class
+ */
+Gauntlet.SpellBook.Tetrahedron = function() {
+  this.name = "tetrahedron";
+  this.damage = Math.floor(Math.random() * 10 + 10);
+
+  var random = Math.round(Math.random() * (this.damageTypes.length - 1));
+  this.type = this.damageTypes[random];
+};
+Gauntlet.SpellBook.Tetrahedron.prototype = new Gauntlet.SpellBook.Spell();
+
+/*
+  An elemental cloud that can be cast by a magical class
+ */
+Gauntlet.SpellBook.Cloud = function() {
+  this.name = "cloud";
+  this.damage = Math.floor(Math.random() * 10 + 10);
+
+  var random = Math.round(Math.random() * (this.damageTypes.length - 1));
+  this.type = this.damageTypes[random];
+};
+Gauntlet.SpellBook.Cloud.prototype = new Gauntlet.SpellBook.Spell();
