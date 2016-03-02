@@ -163,7 +163,56 @@
       </div>
     </section>
 
-    <section id="battleground" class="card card--battleground"></section>
+    <section id="battleground" class="card card--battleground">
+      <!-- Open Row -->
+      <div class='row'>
+
+        <!-- Player Card -->
+        <div class="col-sm-3 portrait">
+          <h2 class="playerName">Player</h2>
+          <!-- Health Bar -->
+          <div class="health-bar-${playerObj.name}" data-total="${playerObj.health}" data-value="${playerObj.health}">
+            <div class="bar ${playerObj.player}">
+              <div class="hit ${playerObj.class}"></div>
+            </div>
+          </div>
+          <p class="description">A green skinned hobgoblin monk sorcerer with 25 health. Wielding a war axe!</p>
+          <div class="stats">
+            <div class="stat1">Str: 80</div>
+            <div class="stat2">Int: 50</div>
+            <div class="stat3">Agil: 60</div>
+          </div>
+        </div>  
+
+        <!-- Combat Text Card -->
+        <div class="col-sm-6 combat-log">
+          <p>SAMPLE FIGHTING TEXT</p>
+          <p>SAMPLE FIGHTING TEXT</p>
+          <p>SAMPLE FIGHTING TEXT</p>
+          <p>SAMPLE FIGHTING TEXT</p>
+        </div>
+
+        <!-- Monster Card -->
+        <div class="col-sm-3 portrait">
+          <h2 class="playerName">Monster</h2>
+          <!-- Health Bar -->
+          <div class="health-bar-${monsterObj.name}" data-total="${playerObj.health}" data-value="${playerObj.health}">
+            <div class="bar ${monsterObj.name}">
+              <div class="hit ${monsterObj.name}"></div>
+            </div>
+          </div>
+          <p class="description">${MonsterObject.ToString()}</p>
+          <div class="stats">
+            <div class="stat1">Str: 50</div>
+            <div class="stat2">Int: 100</div>
+            <div class="stat3">Agil: 45</div>
+          </div>
+        </div>  
+
+      <!-- Close Row -->
+      </div> 
+
+    </section>
 
   </article>
 
