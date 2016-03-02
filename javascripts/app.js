@@ -17,6 +17,10 @@
 // var spell = new Gauntlet.SpellBook.Sphere();
 // console.log("spell: ", spell.toString());
 
+// declare variables that will be used in player constructor
+var playerName;
+var playerClass;
+var playerWeapon;
 
 $(document).ready(function() {
   /*
@@ -55,5 +59,73 @@ $(document).ready(function() {
     $(".card").hide();
     $("." + previousCard).show();
   });
+
+  // Store player name based on entry, on button click
+  $("[next='card--class']").on('click', function(e) {
+    playerName = $('#player-name').val();
+  });
+
+  // Store player class based on user selection
+  // TODO: create class and IDs
+  $('.class').on('click', function (e) {
+    switch (e.target.id) {
+      case 'warrior':
+        playerClass = new Gauntlet.GuildHall.Warrior();
+        break;
+      case 'valkyrie':
+        playerClass = new Gauntlet.GuildHall.Valkyrie();
+        break;
+      case 'berserker':
+        playerClass = new Gauntlet.GuildHall.Berserker();
+        break;
+      case 'monk':
+        playerClass = new Gauntlet.GuildHall.Monk();
+        break;
+      case 'shaman':
+        playerClass = new Gauntlet.GuildHall.Shaman();
+        break;
+      case 'wizard':
+        playerClass = new Gauntlet.GuildHall.Wizard();
+        break;
+      case 'conjurer':
+        playerClass = new Gauntlet.GuildHall.Conjurer();
+        break;
+      case 'sorcerer':
+        playerClass = new Gauntlet.GuildHall.Sorcerer();
+        break;
+      case 'thief':
+        playerClass = new Gauntlet.GuildHall.Thief();
+        break;
+      case 'ninja':
+        playerClass = new Gauntlet.GuildHall.Ninja();
+        break;
+      case 'assassin':
+        playerClass = new Gauntlet.GuildHall.Assassin();
+        break;
+      default:
+        break;
+    }
+  });
+
+  // Store player weapon based on user selection
+  // TODO: create weapon buttons, add classes and IDs
+  $('.weapon').on('click', function (e) {
+    switch (e.target.id) {
+      case 'dagger':
+        playerWeapon = new Gauntlet.Armory.Dagger();
+        break;
+      case 'broad-sword':
+        playerWeapon = new Gauntlet.Armory.BroadSword();
+        break;
+      case 'war-axe':
+        playerWeapon = new Gauntlet.Armory.WarAxe();
+        break;
+      default:
+        break;
+    }
+  })
+
+  // Switch to battle view when "begin" button is clicked
+  // TODO: add "begin" button to HTML
 
 });
