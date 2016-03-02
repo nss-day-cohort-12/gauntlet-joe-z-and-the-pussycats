@@ -38,13 +38,13 @@ $(document).ready(function() {
 
     switch (nextCard) {
       case "card--class":
-        moveAlong = ($("#player-name").val() !== "");
+        moveAlong = ($('#player-name').val() !== "");
         break;
       case "card--weapon":
-        moveAlong = ($("#player-name").val() !== "");
+        moveAlong = playerClass;
         break;
       case "card--battleground":
-        moveAlong = ($("#player-name").val() !== "");
+        moveAlong = playerWeapon;
         break;
     }
 
@@ -69,9 +69,8 @@ $(document).ready(function() {
   });
 
   // Store player class based on user selection
-  // TODO: create class and IDs
   $('.class').on('click', function (e) {
-    switch (e.target.id) {
+    switch (e.currentTarget.id) {
       case 'warrior':
         playerClass = new Gauntlet.GuildHall.Warrior();
         break;
@@ -111,9 +110,8 @@ $(document).ready(function() {
   });
 
   // Store player weapon based on user selection
-  // TODO: create weapon buttons, add classes and IDs
   $('.weapon').on('click', function (e) {
-    switch (e.target.id) {
+    switch (e.currentTarget.id) {
       case 'dagger':
         playerWeapon = new Gauntlet.Armory.Dagger();
         break;
@@ -127,8 +125,4 @@ $(document).ready(function() {
         break;
     }
   })
-
-  // Switch to battle view when "begin" button is clicked
-  // TODO: add "begin" button to HTML
-
 });
