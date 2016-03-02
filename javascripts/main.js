@@ -1,28 +1,5 @@
 // main.js
 
-// in final version,
-// create P1 based on user input and random values
-
-// for testing, make P1 from createTestPlayer
-var P1 = createTestPlayer("Sluggo");
-P1.possessivePronoun = "his";
-// assign P1 a random weapon or spell
-if (P1.class.magical) {
-  var weapons = ["Sphere", "Cube", "Tetrahedron", "Cloud"];
-  // Get a random index from the weapons array
-  var random = Math.floor(Math.random() * weapons.length);
-  // Get the string at the index
-  var randomWeapon = weapons[random];
-  P1.setWeapon(new Gauntlet.SpellBook[randomWeapon]);
-} else {
-  var weapons = ["Dagger", "BroadSword", "WarAxe"];
-  // Get a random index from the weapons array
-  var random = Math.floor(Math.random() * weapons.length);
-  // Get the string at the index
-  var randomWeapon = weapons[random];
-  P1.setWeapon(new Gauntlet.Armory[randomWeapon]);
-}
-
 // create P2, a monster, randomly
 var monsters = ["Orc", "Hobgoblin", "Ogre"];
 // Get a random index from the monsters array
@@ -61,5 +38,3 @@ if (P2.class.magical) {
   var randomWeapon = weapons[random];
   P2.setWeapon(new Gauntlet.Armory[randomWeapon]);
 }
-
-doBattle(P1,P2);
