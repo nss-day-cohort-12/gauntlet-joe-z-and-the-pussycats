@@ -1,7 +1,7 @@
 body {
   font-family: "Lato", "Helvetica", "sans-serif";
   margin: 0;
-  padding: 10px;
+  padding: 20px;
   font-size: 3em;
 }
 
@@ -16,7 +16,80 @@ body {
   min-width: 500px;
 }
 
+/* Battlefield Styling */
+.playerTitle {
+  text-align: center;
+}
 
+h2 {
+  margin: 0 0 10px 0;
+}
+.description {
+  font-size: .6em;
+}
+.portrait {
+  padding: 20px;
+  background: #eee;
+  height: 400px;
+  border-radius: 10px;
+}
+
+.combat-log {
+  border-radius: 10px;  
+}
+
+.stats {
+  text-align: right;
+  font-size: .5em;
+  font-weight: bold;
+}
+
+.portrait, .combat-log {
+  border: 3px solid black;
+}
+
+img {
+  width: 100%;
+}
+
+/* Health Bar */
+/* Health Bar */
+
+.health-bar {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+  height: 20px;
+  padding: 5px;
+  background: #ddd;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 10px;
+  position: relative;
+}
+.bar {
+  background: #62F062;
+  width: 100%;
+  height: 10px;
+  position: relative;
+  
+  transition: width .3s linear;
+
+
+}
+
+.hit {
+  background: rgba(255,255,255,0.6);
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 10px;
+  width: 0px;
+  
+  transition: width .1s linear;
+}
 
 /*
   Section styles
