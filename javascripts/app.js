@@ -84,6 +84,8 @@ $(document).ready(function() {
       P1.possessivePronoun = "his";
       P1.weapon = playerWeapon;
       console.log("P1 created as:",P1);
+      P1.originalHealth = P1.health;
+      P2.originalHealth = P2.health;
       fillPlayers();
       doBattle(P1,P2);
     }
@@ -191,5 +193,10 @@ function fillPlayers() {
     desc += ` Wielding a nasty ${P2.weapon.name}!`;
   }
   $(".monster .description").html(desc);
-
+  $(".human .stat1").html("Str: " + P1.strength);
+  $(".human .stat2").html("Int: " + P1.intelligence);
+  $(".human .stat3").html("Agil: " + P1.agility);
+  $(".monster .stat1").html("Str: " + P2.strength);
+  $(".monster .stat2").html("Int: " + P2.intelligence);
+  $(".monster .stat3").html("Agil: " + P2.agility);
 }

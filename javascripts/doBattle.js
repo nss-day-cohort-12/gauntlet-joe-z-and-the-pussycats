@@ -39,6 +39,7 @@ function coinFlip() {
 }
 
 function attack(attacker,defender) {
+
   report(`${attacker.playerName} is attacking ${defender.playerName}.`);
 
   if (attacker.class.magical) {
@@ -68,6 +69,15 @@ function attack(attacker,defender) {
   }
   report(`${defender.playerName} goes from ${defender.health} health to ${defender.health - damage} health.`);
   defender.health -= damage;
+  var pct = 100 - Math.round(100 * (defender.health / defender.originalHealth));
+  if (pct > 100) {
+    pct = 100;
+  }
+  if (defender.playerName == P2.playerName) {  // defender is monster?
+    $(".monster .hit").css("width",`${pct}%`);
+  } else {
+    $(".human .hit").css("width",`${pct}%`);
+  }
 
   // did defender die?
   if (defender.health <= 0) {
