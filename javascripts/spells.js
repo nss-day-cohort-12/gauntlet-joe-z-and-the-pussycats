@@ -37,7 +37,7 @@ Gauntlet.SpellBook.Sphere.prototype = new Gauntlet.SpellBook.Spell();
  */
 Gauntlet.SpellBook.Cube = function() {
   this.name = "cube";
-  this.damage = Math.floor(Math.random() * 10 + 10);
+  this.damage = Math.floor(Math.random() * 11 + 10);
 
   var random = Math.round(Math.random() * (this.damageTypes.length - 1));
   this.type = this.damageTypes[random];
@@ -48,7 +48,7 @@ Gauntlet.SpellBook.Cube.prototype = new Gauntlet.SpellBook.Spell();
  */
 Gauntlet.SpellBook.Tetrahedron = function() {
   this.name = "tetrahedron";
-  this.damage = Math.floor(Math.random() * 10 + 10);
+  this.damage = Math.floor(Math.random() * 12 + 10);
 
   var random = Math.round(Math.random() * (this.damageTypes.length - 1));
   this.type = this.damageTypes[random];
@@ -60,7 +60,7 @@ Gauntlet.SpellBook.Tetrahedron.prototype = new Gauntlet.SpellBook.Spell();
  */
 Gauntlet.SpellBook.Cloud = function() {
   this.name = "cloud";
-  this.damage = Math.floor(Math.random() * 10 + 10);
+  this.damage = Math.floor(Math.random() * 13 + 10);
 
   var random = Math.round(Math.random() * (this.damageTypes.length - 1));
   this.type = this.damageTypes[random];

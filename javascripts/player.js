@@ -16,8 +16,7 @@ Gauntlet.Combatants.Player = function(name) {
   this.playerName = name || "unknown adventurer";
   this.health = Math.floor(Math.random() * 40 + 1 + 50);  // i.e. 1-40 plus 50
   this.limbs = ["head", "neck", "arm", "leg", "torso"];
-  //this.skinColors = ["gray","crimson","brindle","disease","blue"];
-  this.skinColors = ["goldenrod", "cornflowerBlue", "chartreuse", "salmon", "lawnGreen", "fuchsia"]
+  this.skinColors = ["goldenrod", "cornflowerBlue", "chartreuse", "salmon", "lawnGreen", "fuchsia", "azure", "ghostWhite", "honeydew"];
   // Get a random index from the skinColors array
   var random = Math.floor(Math.random() * this.skinColors.length);
   // Get the string at the index
@@ -58,8 +57,12 @@ Gauntlet.Combatants.Player.prototype.generateClass = function() {
   // Composes the corresponding player class into the player object
   this.class = new Gauntlet.GuildHall[randomClass]();
 
-  // Add the health bonus
+  // Add the bonuses
   this.health += this.class.healthBonus;
+  this.strength += this.class.strengthBonus;
+  this.intelligence += this.class.intelligenceBonus;
+  this.agility += this.class.agilityBonus;
+
   return this.class;
 };
 
@@ -93,4 +96,3 @@ Gauntlet.Combatants.Monster = function() {
 };
 
 Gauntlet.Combatants.Monster.prototype = new Gauntlet.Combatants.Player();
-

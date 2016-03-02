@@ -13,7 +13,7 @@ Gauntlet.Armory.Weapon = function() {
 
 Gauntlet.Armory.Dagger = function() {
   this.name = "dagger";
-  this.damage = 4;
+  this.damage = 10;
   this.hands = 1;
 };
 Gauntlet.Armory.Dagger.prototype = new Gauntlet.Armory.Weapon();
