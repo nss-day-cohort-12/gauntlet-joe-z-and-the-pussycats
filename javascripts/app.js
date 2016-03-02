@@ -21,6 +21,7 @@
 var playerName;
 var playerClass;
 var playerWeapon;
+var P1,P2;
 
 $(document).ready(function() {
   /*
@@ -51,6 +52,37 @@ $(document).ready(function() {
     if (moveAlong) {
       $(".card").hide();
       $("." + nextCard).show();
+    }
+
+    if (nextCard == "card--class") {
+      P1 = new Gauntlet.Combatants.Human();
+      console.log(P1.allowedClasses);
+      $(".class").hide();
+      $("#surprise").show();
+      for (var i = 0; i < P1.allowedClasses.length; i++) {
+        currClass = P1.allowedClasses[i].toLowerCase();
+        if ($(`.card__button#${currClass}`)) {
+          $(`.card__button#${currClass}`).show();
+        }
+      }
+    }
+
+    if (nextCard == "card--weapon") {
+      P1.class = playerClass;
+      if (P1.class.magical) {
+        $("#weapon-select").hide();
+        $("#spell-select").show();
+      } else {
+        $("#weapon-select").show();
+        $("#spell-select").hide();
+      }
+    }
+
+    if (nextCard == "card--battleground") {
+      P1.playerName = "Sluggo";
+      P1.possessivePronoun = "his";
+      P1.weapon = playerWeapon;
+      console.log("P1 created as:",P1);
     }
   });
 
@@ -120,6 +152,18 @@ $(document).ready(function() {
         break;
       case 'war-axe':
         playerWeapon = new Gauntlet.Armory.WarAxe();
+        break;
+      case 'sphere':
+        playerWeapon = new Gauntlet.SpellBook.Sphere();
+        break;
+      case 'cube':
+        playerWeapon = new Gauntlet.SpellBook.Cube();
+        break;
+      case 'tetrahedron':
+        playerWeapon = new Gauntlet.SpellBook.Tetrahedron();
+        break;
+      case 'cloud':
+        playerWeapon = new Gauntlet.SpellBook.Cloud();
         break;
       default:
         break;
