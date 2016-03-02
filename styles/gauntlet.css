@@ -86,8 +86,8 @@ img {
 
 .hit {
   background: rgba(255,255,255,0.6);
-  display: none;
   position: absolute;
+  border-radius: 10px;
   top: 0;
   right: 0;
   height: 10px;

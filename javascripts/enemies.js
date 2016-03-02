@@ -1,7 +1,7 @@
 Gauntlet.Combatants.Orc = function() {
   this.health = this.health + 20;
   this.species = "Orc";
-  this.allowedClasses = ["Warrior", "Berserker", "Shaman"];
+  this.allowedClasses = ["Warrior", "Berserker", "Wizard", "Valkyrie"];
 
   this.generateClass = function() {
     // Get a random index from the allowed classes array
@@ -19,8 +19,9 @@ Gauntlet.Combatants.Orc.prototype = new Gauntlet.Combatants.Monster();
 
 Gauntlet.Combatants.Hobgoblin = function() {
   this.health = this.health + 35;
+  this.agility = this.agility - 10;
   this.species = "Hobgoblin";
-  this.allowedClasses = ["Warrior", "Berserker", "Shaman"];
+  this.allowedClasses = ["Assassin", "Berserker", "Shaman", "Ninja"];
 
   this.generateClass = function() {
     // Get a random index from the allowed classes array
@@ -38,8 +39,9 @@ Gauntlet.Combatants.Hobgoblin.prototype = new Gauntlet.Combatants.Monster();
 
 Gauntlet.Combatants.Ogre = function() {
   this.health = this.health + 50;
+  this.agility = this.agility -20;
   this.species = "Ogre";
-  this.allowedClasses = ["Warrior", "Berserker", "Shaman"];
+  this.allowedClasses = ["Warrior", "Sorcerer", "Monk", "Assassin"];
 
   this.generateClass = function() {
     // Get a random index from the allowed classes array

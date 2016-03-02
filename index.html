@@ -179,8 +179,63 @@
           </div>
         </div>
       </div>
+      <div class="card__button" id="defeatYourEnemies">
+        <a class="card__link btn btn--big btn--orange"
+           href="#"
+           next="card--battleground">
+          <span class="btn__prompt">></span>
+          <span class="btn__text">defeat your enemies</span>
+        </a>
+      </div>
+    </section>
 
-      <div class="card__button">
+    <section id="spell-select" class="card card--weapon">
+      <div class="card__prompt">
+        <div>choose your spell</div>
+        <div>
+          <a class="card__back btn btn--small"
+             href="#"
+             previous="card--class">
+            <span class="btn__prompt">&lt;</span>
+            <span class="btn__text">Back</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-4 col-sm-offset-4">
+            <div class="card__button weapon" id="sphere">
+              <a class="class__link btn btn--big btn--yellow" href="#">
+                <span class="btn__prompt">></span>
+                <span class="btn__text">Sphere</span>
+              </a>
+            </div>
+
+            <div class="card__button weapon" id="cube">
+              <a class="class__link btn btn--big btn--yellow" href="#">
+                <span class="btn__prompt">></span>
+                <span class="btn__text">Cube</span>
+              </a>
+            </div>
+
+            <div class="card__button weapon" id="tetrahedron">
+              <a class="class__link btn btn--big btn--yellow" href="#">
+                <span class="btn__prompt">></span>
+                <span class="btn__text">Tetrahedron</span>
+              </a>
+            </div>
+            <div class="card__button weapon" id="cloud">
+              <a class="class__link btn btn--big btn--yellow" href="#">
+                <span class="btn__prompt">></span>
+                <span class="btn__text">Cloud</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card__button" id="defeatYourEnemies">
         <a class="card__link btn btn--big btn--orange"
            href="#"
            next="card--battleground">
@@ -200,16 +255,16 @@
           <div class="col-sm-3 portrait human">
             <h2 class="playerName">Player</h2>
             <!-- Health Bar -->
-            <div class="health-bar-${playerObj.name}" data-total="${playerObj.health}" data-value="${playerObj.health}">
-              <div class="bar ${playerObj.player}">
-                <div class="hit ${playerObj.class}"></div>
+            <div class="health-bar">
+              <div class="bar">
+                <div class="hit"></div>
               </div>
             </div>
-            <p class="description">A green skinned hobgoblin monk sorcerer with 25 health. Wielding a war axe!</p>
+            <div class="description"></div>
             <div class="stats">
-              <div class="stat1">Str: 80</div>
-              <div class="stat2">Int: 50</div>
-              <div class="stat3">Agil: 60</div>
+              <div class="stat1"></div>
+              <div class="stat2"></div>
+              <div class="stat3"></div>
             </div>
           </div>
 
@@ -225,16 +280,16 @@
           <div class="col-sm-3 portrait monster">
             <h2 class="playerName">Monster</h2>
             <!-- Health Bar -->
-            <div class="health-bar-${monsterObj.name}" data-total="${playerObj.health}" data-value="${playerObj.health}">
-              <div class="bar ${monsterObj.name}">
-                <div class="hit ${monsterObj.name}"></div>
+            <div class="health-bar">
+              <div class="bar">
+                <div class="hit"></div>
               </div>
             </div>
-            <p class="description">${MonsterObject.ToString()}</p>
+            <div class="description"></div>
             <div class="stats">
-              <div class="stat1">Str: 50</div>
-              <div class="stat2">Int: 100</div>
-              <div class="stat3">Agil: 45</div>
+              <div class="stat1"></div>
+              <div class="stat2"></div>
+              <div class="stat3"></div>
             </div>
           </div>
 
@@ -253,7 +308,6 @@
   <script src="javascripts/player.js"></script>
   <script src="javascripts/enemies.js"></script>
   <script src="javascripts/app.js"></script>
-  <script src="javascripts/createTestPlayer.js"></script>
   <script src="javascripts/doBattle.js"></script>
   <script src="javascripts/main.js"></script>
 </body>

@@ -76,11 +76,11 @@ Gauntlet.Combatants.Human = function() {
   this.species = "Human";
   this.intelligence = this.intelligence + 20;
 
-  this.skinColors.push("brown", "red", "white", "disease");
-  randomSkin = Math.round(Math.random() * (this.skinColors.length-1));
-  this.skinColor = this.skinColors[randomSkin];
+  // this.skinColors.push("brown", "red", "white", "disease");
+  // randomSkin = Math.round(Math.random() * (this.skinColors.length-1));
+  // this.skinColor = this.skinColors[randomSkin];
 
-  this.allowedClasses = ["Warrior", "Berserker", "Valkyrie", "Monk"];
+  this.allowedClasses = ["Warrior", "Berserker", "Wizard", "Monk", "Ninja", "Thief", "Sorcerer"];
 };
 Gauntlet.Combatants.Human.prototype = new Gauntlet.Combatants.Player();
 
