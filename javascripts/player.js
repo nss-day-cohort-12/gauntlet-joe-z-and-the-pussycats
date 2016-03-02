@@ -14,10 +14,14 @@ Gauntlet.Combatants.Player = function(name) {
   this.weapon = null;
 
   this.playerName = name || "unknown adventurer";
-  this.health = Math.floor(Math.random() * 40 + 50);
+  this.health = Math.floor(Math.random() * 40 + 1 + 50);  // i.e. 1-40 plus 50
   this.limbs = ["head", "neck", "arm", "leg", "torso"];
-  this.skinColor = "gray";
-  this.skinColors = [this.skinColor];
+  //this.skinColors = ["gray","crimson","brindle","disease","blue"];
+  this.skinColors = ["goldenrod", "cornflowerBlue", "chartreuse", "salmon", "lawnGreen", "fuchsia"]
+  // Get a random index from the skinColors array
+  var random = Math.floor(Math.random() * this.skinColors.length);
+  // Get the string at the index
+  this.skinColor = this.skinColors[random];
   this.strength = 90;
   this.intelligence = 90;
   this.agility = 50;
