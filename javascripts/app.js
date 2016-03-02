@@ -79,10 +79,13 @@ $(document).ready(function() {
     }
 
     if (nextCard == "card--battleground") {
-      P1.playerName = "Sluggo";
+      console.log("processing card--battleground");
+      P1.playerName = playerName;
       P1.possessivePronoun = "his";
       P1.weapon = playerWeapon;
       console.log("P1 created as:",P1);
+      fillPlayers();
+      doBattle(P1,P2);
     }
   });
 
@@ -170,3 +173,23 @@ $(document).ready(function() {
     }
   })
 });
+
+function fillPlayers() {
+  $(".human h2").html(P1.playerName);
+  $(".monster h2").html(P2.playerName);
+  var desc = `A ${P1.skinColor} skinned ${P1.species} ${P1.class.name} with ${P1.health} health.`;
+  if (P1.class.magical) {
+    desc += ` Able to cast ${P1.weapon.name} of ${P1.weapon.type}!`;
+  } else {
+    desc += ` Wielding a nasty ${P1.weapon.name}!`;
+  }
+  $(".human .description").html(desc);
+  desc = `A ${P2.skinColor} skinned ${P2.species} ${P2.class.name} with ${P2.health} health.`;
+  if (P2.class.magical) {
+    desc += ` Able to cast ${P2.weapon.name} of ${P2.weapon.type}!`;
+  } else {
+    desc += ` Wielding a nasty ${P2.weapon.name}!`;
+  }
+  $(".monster .description").html(desc);
+
+}

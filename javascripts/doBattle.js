@@ -83,6 +83,7 @@ function rollDice() {
 }
 
 function report(text) {
-  // in final version, supplement this ffunction with output to DOM element
+  // in final version, supplement this function with output to DOM element
   console.log(text);
 }
+
