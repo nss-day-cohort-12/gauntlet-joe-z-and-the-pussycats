@@ -1,14 +1,11 @@
-/*
-  TODO: Modularize this code with IIFE or Browserify
- */
-var Gauntlet = Gauntlet || {};
-Gauntlet.SpellBook = {};
+'use strict';
 
+let SpellBook = {};
 
 /*
   Base spell function that defines name, damage, damage type
  */
-Gauntlet.SpellBook.Spell = function() {
+SpellBook.Spell = function() {
   this.name = "";
   this.damage = 0;
 
@@ -23,46 +20,48 @@ Gauntlet.SpellBook.Spell = function() {
 /*
   An elemental sphere that can be cast by a magical class
  */
-Gauntlet.SpellBook.Sphere = function() {
+SpellBook.Sphere = function() {
   this.name = "sphere";
   this.damage = Math.floor(Math.random() * 10 + 10);
 
   var random = Math.round(Math.random() * (this.damageTypes.length - 1));
   this.type = this.damageTypes[random];
 };
-Gauntlet.SpellBook.Sphere.prototype = new Gauntlet.SpellBook.Spell();
+SpellBook.Sphere.prototype = new SpellBook.Spell();
 
 /*
   An elemental sphere that can be cast by a magical class
  */
-Gauntlet.SpellBook.Cube = function() {
+SpellBook.Cube = function() {
   this.name = "cube";
   this.damage = Math.floor(Math.random() * 11 + 10);
 
   var random = Math.round(Math.random() * (this.damageTypes.length - 1));
   this.type = this.damageTypes[random];
 };
-Gauntlet.SpellBook.Cube.prototype = new Gauntlet.SpellBook.Spell();
+SpellBook.Cube.prototype = new SpellBook.Spell();
 /*
   An elemental sphere that can be cast by a magical class
  */
-Gauntlet.SpellBook.Tetrahedron = function() {
+SpellBook.Tetrahedron = function() {
   this.name = "tetrahedron";
   this.damage = Math.floor(Math.random() * 12 + 10);
 
   var random = Math.round(Math.random() * (this.damageTypes.length - 1));
   this.type = this.damageTypes[random];
 };
-Gauntlet.SpellBook.Tetrahedron.prototype = new Gauntlet.SpellBook.Spell();
+SpellBook.Tetrahedron.prototype = new SpellBook.Spell();
 
 /*
   An elemental cloud that can be cast by a magical class
  */
-Gauntlet.SpellBook.Cloud = function() {
+SpellBook.Cloud = function() {
   this.name = "cloud";
   this.damage = Math.floor(Math.random() * 13 + 10);
 
   var random = Math.round(Math.random() * (this.damageTypes.length - 1));
   this.type = this.damageTypes[random];
 };
-Gauntlet.SpellBook.Cloud.prototype = new Gauntlet.SpellBook.Spell();
+SpellBook.Cloud.prototype = new SpellBook.Spell();
+
+module.exports = Spellbook;
