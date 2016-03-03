@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Gauntlet</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="styles/gauntlet.css">
@@ -253,7 +254,7 @@
 
           <!-- Player Card -->
           <div class="col-sm-3 portrait human">
-            <h2 class="playerName">Player</h2>
+            <h2 class="playerName"></h2>
             <!-- Health Bar -->
             <div class="health-bar">
               <div class="bar">
@@ -267,24 +268,22 @@
               <div class="stat3"></div>
             </div>
           <!-- ATTACK BUTTON-->
-        <div class="attack-button">
-          <button id="attackBtn">ATTACK!</button> 
-        </div>
+            <div class="attack-button">
+              <button id="attackBtn">ATTACK!</button> 
+            </div>
           </div>
 
 
 
           <!-- Combat Text Card -->
           <div class="col-sm-6 combat-log">
-            <p>SAMPLE FIGHTING TEXT</p>
-            <p>SAMPLE FIGHTING TEXT</p>
-            <p>SAMPLE FIGHTING TEXT</p>
-            <p>SAMPLE FIGHTING TEXT</p>
+            <div class="combat-log-text">
+            </div>
           </div>
 
           <!-- Monster Card -->
           <div class="col-sm-3 portrait monster">
-            <h2 class="playerName">Monster</h2>
+            <h2 class="playerName"></h2>
             <!-- Health Bar -->
             <div class="health-bar">
               <div class="bar">
@@ -309,5 +308,6 @@
 
   <script src="http://code.jquery.com/jquery-1.11.2.min.js"></script>
   <script src="dist/bundle.js"></script>
+
 </body>
 </html>
