@@ -1,16 +1,12 @@
 'use strict';
 
-const guildHall = require('./classes');
-const armory = require('./weapons');
-const spellBook = require('./spells');
-const player = require('./player');
-const enemies = require('./enemies');
-
-let combatants = {
-	player, enemies
-}
+const GuildHall = require('./classes');
+const Armory = require('./weapons');
+const SpellBook = require('./spells');
+const Combatants = require('./combatants');
 
 let Gauntlet = {
-	armory, spellBook, guildHall, combatants
+	GuildHall, Armory, SpellBook, Combatants
 };
 
+module.exports = Gauntlet;

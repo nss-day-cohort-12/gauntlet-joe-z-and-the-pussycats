@@ -1,3 +1,7 @@
+'use strict';
+
+const Gauntlet = require('./gauntlet');
+console.log('Gauntlet', Gauntlet);
 // declare global variables that will be used in player constructor
 var playerName;
 var playerClass;
@@ -40,7 +44,7 @@ $(document).ready(function() {
       $(".class").hide();
       $("#surprise").show();
       for (var i = 0; i < P1.allowedClasses.length; i++) {
-        currClass = P1.allowedClasses[i].toLowerCase();
+        let currClass = P1.allowedClasses[i].toLowerCase();
         if ($(`.card__button#${currClass}`)) {
           $(`.card__button#${currClass}`).show();
         }
@@ -61,6 +65,7 @@ $(document).ready(function() {
     if (nextCard == "card--battleground") {
       P1.playerName = playerName;
       P1.possessivePronoun = "his";
+      console.log(P1);
       P1.weapon = playerWeapon;
       P2 = createMonster();
       P1.originalHealth = P1.health;
@@ -180,4 +185,47 @@ function fillPlayers() {
   $(".monster .stat1").html("Str: " + P2.strength);
   $(".monster .stat2").html("Int: " + P2.intelligence);
   $(".monster .stat3").html("Agil: " + P2.agility);
+}
+
+function createMonster() {
+  // create P2, a monster, randomly
+  var monsters = ["Orc", "Hobgoblin", "Ogre"];
+  // Get a random index from the monsters array
+  var random = Math.floor(Math.random() * monsters.length);
+  // Get the string at the index
+  var P2 = new Gauntlet.Combatants[monsters[random]];
+  var monsterNames = [{name:"Pauly Shore",       possessivePronoun:"his"},
+                      {name:"Elvira",            possessivePronoun:"her"},
+                      {name:"Stephen Baldwin",   possessivePronoun:"his"},
+                      {name:"Gary Busey",        possessivePronoun:"his"},
+                      {name:"Dolph Lundgren",    possessivePronoun:"his"},
+                      {name:"Dennis Rodman",     possessivePronoun:"his"},
+                      {name:"Snooki",            possessivePronoun:"her"},
+                      {name:"Amy Winehouse",     possessivePronoun:"her"},
+                      {name:"William Shatner",   possessivePronoun:"his"} ];
+  // Get a random index from the monsterNames array
+  var random = Math.floor(Math.random() * monsterNames.length);
+  // Get the string at the index
+  P2.playerName = monsterNames[random].name
+  P2.possessivePronoun = monsterNames[random].possessivePronoun;
+  P2.class = P2.generateClass();
+
+  // assign P2 a random weapon or spell
+  if (P2.class.magical) {
+    var weapons = ["Sphere", "Cube", "Tetrahedron", "Cloud"];
+    // Get a random index from the weapons array
+    var random = Math.floor(Math.random() * weapons.length);
+    // Get the string at the index
+    var randomWeapon = weapons[random];
+    P2.setWeapon(new Gauntlet.SpellBook[randomWeapon]);
+  } else {
+    var weapons = ["Dagger", "BroadSword", "WarAxe"];
+    // Get a random index from the weapons array
+    var random = Math.floor(Math.random() * weapons.length);
+    // Get the string at the index
+    var randomWeapon = weapons[random];
+    P2.setWeapon(new Gauntlet.Armory[randomWeapon]);
+  }
+
+  return P2;
 }

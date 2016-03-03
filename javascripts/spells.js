@@ -64,4 +64,4 @@ SpellBook.Cloud = function() {
 };
 SpellBook.Cloud.prototype = new SpellBook.Spell();
 
-module.exports = Spellbook;
+module.exports = SpellBook;
