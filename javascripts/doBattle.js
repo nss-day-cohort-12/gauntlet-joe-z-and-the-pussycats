@@ -1,3 +1,5 @@
+module.exports = doBattle;
+
 function doBattle(P1,P2) {
   // P1 is the player's character
   report(`You are ${P1.playerName}, a ${P1.skinColor} skinned ${P1.species} ${P1.class.name} with ${P1.health} health.`);
@@ -17,16 +19,13 @@ function doBattle(P1,P2) {
   report("It's on!!!");
 
   var playerAttacking = coinFlip() + 1;  // 1 or 2
-  if (playerAttacking === 1) {
-    var goesFirst = P1.playerName;
-  } else {
-    var goesFirst = P2.playerName;
-  }
+  var goesFirst = playerAttacking === 1 ? P1.playerName : P2.playerName;
+
   report(`${goesFirst} wins the coin flip and will go first.`);
   report(". . .","center");
 
   if (playerAttacking === 2) {
-    doAnotherAttack = attack(P2,P1)
+    doAnotherAttack = attack(P2,P1);
     if (!doAnotherAttack) {
       gameOver();
     }
@@ -57,11 +56,7 @@ function coinFlip() {
 }
 
 function attack(attacker,defender) {
-  if (attacker.playerNum === 1) {
-    var justification = "left";
-  } else {
-    var justification = "right";
-  }
+  var justification = attacker.playerNum === 1 ? "left" : "right";
   report(`${attacker.playerName} is attacking ${defender.playerName}.`,justification);
 
   if (attacker.class.magical) {
