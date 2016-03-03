@@ -4,6 +4,8 @@
 var Gauntlet = Gauntlet || {};
 Gauntlet.SpellBook = {};
 
+module.exports = Gauntlet.SpellBook;
+
 
 /*
   Base spell function that defines name, damage, damage type
@@ -17,7 +19,7 @@ Gauntlet.SpellBook.Spell = function() {
 
   this.toString = function() {
     return this.name + " of " + this.type + " for " + this.damage + " damage!";
-  }
+  };
 };
 
 /*

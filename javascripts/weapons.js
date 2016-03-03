@@ -1,3 +1,4 @@
+
 var Gauntlet = Gauntlet || {};
 Gauntlet.Armory = {};
 
@@ -8,7 +9,7 @@ Gauntlet.Armory.Weapon = function() {
 
   this.toString = function() {
     return this.name;
-  }
+  };
 };
 
 Gauntlet.Armory.Dagger = function() {
@@ -32,3 +33,4 @@ Gauntlet.Armory.WarAxe = function() {
 };
 Gauntlet.Armory.WarAxe.prototype = new Gauntlet.Armory.Weapon();
 
+module.exports = Gauntlet.Armory;
