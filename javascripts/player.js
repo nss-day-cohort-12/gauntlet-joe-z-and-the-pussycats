@@ -16,7 +16,7 @@ Gauntlet.Combatants.Player = function(name) {
   this.playerName = name || "unknown adventurer";
   this.health = Math.floor(Math.random() * 40 + 1 + 50);  // i.e. 1-40 plus 50
   this.limbs = ["head", "neck", "arm", "leg", "torso"];
-  this.skinColors = ["goldenrod", "cornflowerBlue", "chartreuse", "salmon", "lawnGreen", "fuchsia", "azure", "ghostWhite", "honeydew"];
+  this.skinColors = ["goldenrod", "cornflowerBlue", "chartreuse", "salmon", "lawnGreen", "fuchsia", "ghostWhite", "honeydew"];
   // Get a random index from the skinColors array
   var random = Math.floor(Math.random() * this.skinColors.length);
   // Get the string at the index

@@ -67,7 +67,7 @@ $(document).ready(function() {
       P2.originalHealth = P2.health;
       P1.playerNum = 1;
       P2.playerNum = 2;
-      fillPlayers();
+      fillPlayerInfo();
       doBattle(P1,P2);
     }
   });
@@ -127,6 +127,10 @@ $(document).ready(function() {
     }
   });
 
+  $('#surprise').click(function() {
+    playerClass = P1.generateClass();
+  })
+
   // Store player weapon based on user selection
   $('.weapon').on('click', function (e) {
     switch (e.currentTarget.id) {
@@ -157,7 +161,7 @@ $(document).ready(function() {
   })
 });
 
-function fillPlayers() {
+function fillPlayerInfo() {
   $(".human h2").html(P1.playerName);
   $(".monster h2").html(P2.playerName);
   var desc = `A ${P1.skinColor} skinned ${P1.species} ${P1.class.name} with ${P1.health} health.`;
