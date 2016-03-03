@@ -149,6 +149,10 @@ $(document).ready(function() {
     }
   });
 
+  $('#surprise').click(function() {
+    playerClass = P1.generateClass();
+  });
+
   // Store player weapon based on user selection
   $('.weapon').on('click', function (e) {
     switch (e.currentTarget.id) {
