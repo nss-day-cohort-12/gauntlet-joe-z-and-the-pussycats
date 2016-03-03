@@ -1,8 +1,9 @@
-/*
-  TODO: Modularize this code with IIFE or Browserify
- */
-var Gauntlet = Gauntlet || {};
+'use strict';
+
+let Gauntlet = {};
 Gauntlet.GuildHall = {};
+
+module.exports = Gauntlet.GuildHall;
 
 /*
   Base function for a player, or enemy, class (profession)
@@ -17,16 +18,9 @@ Gauntlet.GuildHall.PlayerClass = function() {
 
   this.toString = function() {
     return this.name;
-  }
+  };
 };
 
-/*
-    FIGHTER CLASSES
-      - Warrior
-      - Valkyrie
-      - Berserker
-      - Monk
- */
 Gauntlet.GuildHall.Fighter = function() {
   this.healthBonus = 20;
   this.strengthBonus = 10;
@@ -65,14 +59,6 @@ Gauntlet.GuildHall.Monk = function() {
 };
 Gauntlet.GuildHall.Monk.prototype = new Gauntlet.GuildHall.Fighter();
 
-
-/*
-    MAGICAL CLASSES
-      - Shaman
-      - Wizard
-      - Conujurer
-      - Sorcerer
- */
 Gauntlet.GuildHall.Mage = function() {
   this.name = "Mage";
   this.magical = true;
@@ -116,14 +102,6 @@ Gauntlet.GuildHall.Sorcerer = function() {
   this.intelligenceBonus = this.intelligenceBonus + 30;
 };
 Gauntlet.GuildHall.Sorcerer.prototype = new Gauntlet.GuildHall.Mage();
-
-
-/*
-    STEALTH CLASSES
-      - Thief
-      - Ninja
-      - Assassin
- */
 
 Gauntlet.GuildHall.Eluder = function() {
   this.name = "Eluder";

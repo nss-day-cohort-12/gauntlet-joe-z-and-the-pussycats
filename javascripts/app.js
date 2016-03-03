@@ -1,8 +1,29 @@
+'use strict';
+
 // declare global variables that will be used in player constructor
-var playerName;
-var playerClass;
-var playerWeapon;
-var P1,P2;
+let playerName;
+let playerClass;
+let playerWeapon;
+let P1,P2;
+
+let Gauntlet = {};
+
+Gauntlet.Armory = require('./weapons');
+console.log(`Armory Test: `, Gauntlet.Armory);
+Gauntlet.SpellBook = require('./spells');
+console.log(`SpellBook Test: `, Gauntlet.SpellBook);
+Gauntlet.GuildHall = require('./classes');
+console.log(`GuildHall Test: `, Gauntlet.GuildHall);
+
+Gauntlet.Combatants = require('./enemies');
+console.log(`Combatants Test: `, Gauntlet.Combatants);
+
+let createMonster = require('./createMonster');
+let doBattle = require('./doBattle');
+
+console.log(`Gauntlet on app.js : `, Gauntlet);
+
+module.exports = Gauntlet;
 
 $(document).ready(function() {
   /*
@@ -15,8 +36,8 @@ $(document).ready(function() {
     move on to the next view.
    */
   $(".card__link").click(function(e) {
-    var nextCard = $(this).attr("next");
-    var moveAlong = false;
+    let nextCard = $(this).attr("next");
+    let moveAlong = false;
 
     switch (nextCard) {
       case "card--class":
@@ -39,8 +60,8 @@ $(document).ready(function() {
       P1 = new Gauntlet.Combatants.Human();
       $(".class").hide();
       $("#surprise").show();
-      for (var i = 0; i < P1.allowedClasses.length; i++) {
-        currClass = P1.allowedClasses[i].toLowerCase();
+      for (let i = 0; i < P1.allowedClasses.length; i++) {
+        let currClass = P1.allowedClasses[i].toLowerCase();
         if ($(`.card__button#${currClass}`)) {
           $(`.card__button#${currClass}`).show();
         }
@@ -76,7 +97,7 @@ $(document).ready(function() {
     When the back button clicked, move back a view
    */
   $(".card__back").click(function(e) {
-    var previousCard = $(this).attr("previous");
+    let previousCard = $(this).attr("previous");
     $(".card").hide();
     $("." + previousCard).show();
   });
@@ -154,13 +175,13 @@ $(document).ready(function() {
       default:
         break;
     }
-  })
+  });
 });
 
 function fillPlayers() {
   $(".human h2").html(P1.playerName);
   $(".monster h2").html(P2.playerName);
-  var desc = `A ${P1.skinColor} skinned ${P1.species} ${P1.class.name} with ${P1.health} health.`;
+  let desc = `A ${P1.skinColor} skinned ${P1.species} ${P1.class.name} with ${P1.health} health.`;
   if (P1.class.magical) {
     desc += ` Able to cast ${P1.weapon.name} of ${P1.weapon.type}!`;
   } else {

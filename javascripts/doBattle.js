@@ -1,3 +1,7 @@
+'use strict';
+
+module.exports = doBattle;
+
 function doBattle(P1,P2) {
   // P1 is the player's character
   report(`You are ${P1.playerName}, a ${P1.skinColor} skinned ${P1.species} ${P1.class.name} with ${P1.health} health.`);
@@ -16,17 +20,15 @@ function doBattle(P1,P2) {
 
   report("It's on!!!");
 
-  var playerAttacking = coinFlip() + 1;  // 1 or 2
-  if (playerAttacking === 1) {
-    var goesFirst = P1.playerName;
-  } else {
-    var goesFirst = P2.playerName;
-  }
+  let playerAttacking = coinFlip() + 1;  // 1 or 2
+  let goesFirst = playerAttacking === 1 ? P1.playerName : P2.playerName;
+  let doAnotherAttack;
+
   report(`${goesFirst} wins the coin flip and will go first.`);
   report(". . .","center");
 
   if (playerAttacking === 2) {
-    doAnotherAttack = attack(P2,P1)
+    doAnotherAttack = attack(P2,P1);
     if (!doAnotherAttack) {
       gameOver();
     }
@@ -57,11 +59,7 @@ function coinFlip() {
 }
 
 function attack(attacker,defender) {
-  if (attacker.playerNum === 1) {
-    var justification = "left";
-  } else {
-    var justification = "right";
-  }
+  let justification = attacker.playerNum === 1 ? "left" : "right";
   report(`${attacker.playerName} is attacking ${defender.playerName}.`,justification);
 
   if (attacker.class.magical) {
@@ -78,22 +76,22 @@ function attack(attacker,defender) {
   }
 
   // defender takes damage
-  var damage = Math.floor(Math.random() * attacker.weapon.damage + 1);  // base damage
+  let damage = Math.floor(Math.random() * attacker.weapon.damage + 1);  // base damage
   if (attacker.class.magical) {
     damage += Math.round(damage * attacker.intelligence / 50);  // damage adjustment
     report(`and does ${damage} points of damage!`,justification);
   } else {
     damage += Math.round(damage * attacker.strength / 50);  // damage adjustment
     // Get a random index from the limbs array
-    var random = Math.floor(Math.random() * defender.limbs.length);
+    let random = Math.floor(Math.random() * defender.limbs.length);
     // Get the string at the index
-    var randomLimb = defender.limbs[random];
+    let randomLimb = defender.limbs[random];
     report(`and strikes ${defender.playerName} in the ${randomLimb} for ${damage} points of damage!`,justification);
   }
   report(`${defender.playerName} goes from ${defender.health} health to ${defender.health - damage} health.`,justification);
   report(". . .","center");  // blank line
   defender.health -= damage;
-  var pct = Math.round(100 * (defender.health / defender.originalHealth));
+  let pct = Math.round(100 * (defender.health / defender.originalHealth));
   if (pct < 0) {
     pct = 0;
   }
@@ -120,7 +118,7 @@ function report(text,justification) {
   if (!justification) {
     justification = "left";
   }
-  var oldTxt = $(".combat-log-text").html();
+  let oldTxt = $(".combat-log-text").html();
   $(".combat-log-text").html(oldTxt + `<p style='text-align:${justification}'>${text}</p>`);
   $(".combat-log").scrollTop($(".combat-log-text").height());
   console.log(text);

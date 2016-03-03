@@ -1,13 +1,21 @@
-// createMonster()
+'use strict';
+
+let Gauntlet = require("./app");
+Gauntlet.Armory = require('./weapons');
+Gauntlet.SpellBook = require('./spells');
+Gauntlet.GuildHall = require('./classes');
+Gauntlet.Combatants = require('./enemies');
+
+console.log(`Gauntlet createMonster: `, Gauntlet);
+
+module.exports = createMonster;
 
 function createMonster() {
   // create P2, a monster, randomly
-  var monsters = ["Orc", "Hobgoblin", "Ogre"];
-  // Get a random index from the monsters array
-  var random = Math.floor(Math.random() * monsters.length);
-  // Get the string at the index
-  var P2 = new Gauntlet.Combatants[monsters[random]];
-  var monsterNames = [{name:"Pauly Shore",       possessivePronoun:"his"},
+  let monsters = ["Orc", "Hobgoblin", "Ogre"];
+  // Create a new random monster from the monsters array
+  let P2 = new Gauntlet.Combatants[monsters[randomNumber(monsters)]]();
+  let monsterNames = [{name:"Pauly Shore",       possessivePronoun:"his"},
                       {name:"Elvira",            possessivePronoun:"her"},
                       {name:"Stephen Baldwin",   possessivePronoun:"his"},
                       {name:"Gary Busey",        possessivePronoun:"his"},
@@ -16,29 +24,31 @@ function createMonster() {
                       {name:"Snooki",            possessivePronoun:"her"},
                       {name:"Amy Winehouse",     possessivePronoun:"her"},
                       {name:"William Shatner",   possessivePronoun:"his"} ];
-  // Get a random index from the monsterNames array
-  var random = Math.floor(Math.random() * monsterNames.length);
   // Get the string at the index
-  P2.playerName = monsterNames[random].name
-  P2.possessivePronoun = monsterNames[random].possessivePronoun;
+  let monsterNum = randomNumber(monsterNames);
+  P2.playerName = monsterNames[monsterNum].name;
+  P2.possessivePronoun = monsterNames[monsterNum].possessivePronoun;
   P2.class = P2.generateClass();
+
+  let weapons, randomWeapon;
 
   // assign P2 a random weapon or spell
   if (P2.class.magical) {
-    var weapons = ["Sphere", "Cube", "Tetrahedron", "Cloud"];
-    // Get a random index from the weapons array
-    var random = Math.floor(Math.random() * weapons.length);
-    // Get the string at the index
-    var randomWeapon = weapons[random];
-    P2.setWeapon(new Gauntlet.SpellBook[randomWeapon]);
+    weapons = ["Sphere", "Cube", "Tetrahedron", "Cloud"];
+    // Select a random weapon from the magic weapons array
+    randomWeapon = weapons[randomNumber(weapons)];
+    P2.setWeapon(new Gauntlet.SpellBook[randomWeapon]());
   } else {
-    var weapons = ["Dagger", "BroadSword", "WarAxe"];
-    // Get a random index from the weapons array
-    var random = Math.floor(Math.random() * weapons.length);
-    // Get the string at the index
-    var randomWeapon = weapons[random];
-    P2.setWeapon(new Gauntlet.Armory[randomWeapon]);
+    weapons = ["Dagger", "BroadSword", "WarAxe"];
+    // Select a random weapon from the melee weapons array
+    randomWeapon = weapons[randomNumber(weapons)];
+    P2.setWeapon(new Gauntlet.Armory[randomWeapon]());
   }
 
   return P2;
+}
+
+// Returns random number between 0 and the length of the passed array
+function randomNumber (array) {
+  return  Math.floor(Math.random() * array.length);
 }
