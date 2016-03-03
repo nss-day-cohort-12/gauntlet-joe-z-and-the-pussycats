@@ -1,6 +1,3 @@
-/*
-  TODO: Modularize this code with IIFE or Browserify
- */
 var Gauntlet = Gauntlet || {};
 Gauntlet.GuildHall = require("./classes");
 Gauntlet.Combatants = {};
@@ -8,10 +5,7 @@ console.log(`Gauntlet on player: `, Gauntlet);
 console.log(`GuildHall on player: `, Gauntlet.GuildHall);
 
 module.exports = Gauntlet;
-/*
-  Define the base object for any player of Gauntlet,
-  whether a human player or a monster.
- */
+
 Gauntlet.Combatants.Player = function(name) {
   this.species = null;
   this.class = null;
@@ -40,7 +34,6 @@ Gauntlet.Combatants.Player = function(name) {
       this.health,
       " health. ",
       (this.class.magical) ? "Able to cast " : " Wielding a ",
-      // this.weapon.toString(),
       "!"
     ].join("");
     return output;
@@ -70,29 +63,16 @@ Gauntlet.Combatants.Player.prototype.generateClass = function() {
   return this.class;
 };
 
-/*
-  Define the base properties for a human in a
-  constructor function.
- */
 Gauntlet.Combatants.Human = function() {
   var randomSkin;
 
   this.species = "Human";
   this.intelligence = this.intelligence + 20;
 
-  // this.skinColors.push("brown", "red", "white", "disease");
-  // randomSkin = Math.round(Math.random() * (this.skinColors.length-1));
-  // this.skinColor = this.skinColors[randomSkin];
-
   this.allowedClasses = ["Warrior", "Berserker", "Wizard", "Monk", "Ninja", "Thief", "Sorcerer"];
 };
 Gauntlet.Combatants.Human.prototype = new Gauntlet.Combatants.Player();
 
-
-/*
-  Define the base properties for a monster in a
-  constructor function.
- */
 Gauntlet.Combatants.Monster = function() {
   this.health = this.health - 30;
   this.intelligence = this.intelligence -20;

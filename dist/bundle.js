@@ -17,59 +17,12 @@ console.log(`GuildHall Test: `, Gauntlet.GuildHall);
 Gauntlet.Combatants = require('./enemies');
 console.log(`Combatants Test: `, Gauntlet.Combatants);
 
-console.log(`Gauntlet App: `, Gauntlet);
+var createMonster = require('./createMonster');
+var doBattle = require('./doBattle');
+
+console.log(`Gauntlet on app.js : `, Gauntlet);
 
 module.exports = Gauntlet;
-
-// main.js
-
-// // create P2, a monster, randomly
-// var monsters = ["Orc", "Hobgoblin", "Ogre"];
-// // Get a random index from the monsters array
-// var random = Math.floor(Math.random() * monsters.length);
-// // Get the string at the index
-
-// // console.log(`new test: `, Gauntlet.Combatants["Orc"]());
-// var P2 = new Gauntlet.Combatants[monsters[random]]();
-
-// console.log(`p2: `, P2);
-// var monsterNames = [{name:"Pauly Shore",       possessivePronoun:"his"},
-//                     {name:"Elvira",            possessivePronoun:"her"},
-//                     {name:"Stephen Baldwin",   possessivePronoun:"his"},
-//                     {name:"Gary Busey",        possessivePronoun:"his"},
-//                     {name:"Dolph Lundgren",    possessivePronoun:"his"},
-//                     {name:"Tom Green",         possessivePronoun:"his"},
-//                     {name:"Snooki",            possessivePronoun:"her"},
-//                     {name:"Mama June",         possessivePronoun:"her"},
-//                     {name:"William Shatner",   possessivePronoun:"his"} ];
-// // Get a random index from the monsterNames array
-// var random = Math.floor(Math.random() * monsterNames.length);
-// // Get the string at the index
-// P2.playerName = monsterNames[random].name;
-// P2.possessivePronoun = monsterNames[random].possessivePronoun;
-// P2.class = P2.generateClass();
-
-// // assign P2 a random weapon or spell
-// if (P2.class.magical) {
-//   var weapons = ["Sphere", "Cube", "Tetrahedron", "Cloud"];
-//   // Get a random index from the weapons array
-//   var random = Math.floor(Math.random() * weapons.length);
-//   // Get the string at the index
-//   var randomWeapon = weapons[random];
-//   P2.setWeapon(new Gauntlet.SpellBook[randomWeapon]());
-// } else {
-//   var weapons = ["Dagger", "BroadSword", "WarAxe"];
-//   // Get a random index from the weapons array
-//   var random = Math.floor(Math.random() * weapons.length);
-//   // Get the string at the index
-//   var randomWeapon = weapons[random];
-//   P2.setWeapon(new Gauntlet.Armory[randomWeapon]());
-// }
-
-console.log(`p2: `, P2);
-
-
-
 
 $(document).ready(function() {
   /*
@@ -198,13 +151,13 @@ $(document).ready(function() {
   $('.weapon').on('click', function (e) {
     switch (e.currentTarget.id) {
       case 'dagger':
-        playerWeapon = new Armory.Dagger();
+        playerWeapon = new Gauntlet.Armory.Dagger();
         break;
       case 'broad-sword':
-        playerWeapon = new Armory.BroadSword();
+        playerWeapon = new Gauntlet.Armory.BroadSword();
         break;
       case 'war-axe':
-        playerWeapon = new Armory.WarAxe();
+        playerWeapon = new Gauntlet.Armory.WarAxe();
         break;
       case 'sphere':
         playerWeapon = new Gauntlet.SpellBook.Sphere();
@@ -248,7 +201,7 @@ function fillPlayers() {
   $(".monster .stat2").html("Int: " + P2.intelligence);
   $(".monster .stat3").html("Agil: " + P2.agility);
 }
-},{"./classes":2,"./enemies":3,"./spells":5,"./weapons":6}],2:[function(require,module,exports){
+},{"./classes":2,"./createMonster":3,"./doBattle":4,"./enemies":5,"./spells":7,"./weapons":8}],2:[function(require,module,exports){
 /*
   TODO: Modularize this code with IIFE or Browserify
  */
@@ -415,6 +368,184 @@ Gauntlet.GuildHall.Assassin.prototype = new Gauntlet.GuildHall.Eluder();
 
 
 },{}],3:[function(require,module,exports){
+// createMonster()
+
+var Gauntlet = require("./app");
+Gauntlet.Armory = require('./weapons');
+Gauntlet.SpellBook = require('./spells');
+Gauntlet.GuildHall = require('./classes');
+Gauntlet.Combatants = require('./enemies');
+
+console.log(`Gauntlet createMonster: `, Gauntlet);
+
+module.exports = createMonster;
+
+function createMonster() {
+  // create P2, a monster, randomly
+  var monsters = ["Orc", "Hobgoblin", "Ogre"];
+  // Create a new random monster from the monsters array
+  var P2 = new Gauntlet.Combatants[monsters[randomNumber(monsters)]]();
+  var monsterNames = [{name:"Pauly Shore",       possessivePronoun:"his"},
+                      {name:"Elvira",            possessivePronoun:"her"},
+                      {name:"Stephen Baldwin",   possessivePronoun:"his"},
+                      {name:"Gary Busey",        possessivePronoun:"his"},
+                      {name:"Dolph Lundgren",    possessivePronoun:"his"},
+                      {name:"Dennis Rodman",     possessivePronoun:"his"},
+                      {name:"Snooki",            possessivePronoun:"her"},
+                      {name:"Amy Winehouse",     possessivePronoun:"her"},
+                      {name:"William Shatner",   possessivePronoun:"his"} ];
+  // Get the string at the index
+  var monsterNum = randomNumber(monsterNames);
+  P2.playerName = monsterNames[monsterNum].name;
+  P2.possessivePronoun = monsterNames[monsterNum].possessivePronoun;
+  P2.class = P2.generateClass();
+
+  var weapons, randomWeapon;
+
+  // assign P2 a random weapon or spell
+  if (P2.class.magical) {
+    weapons = ["Sphere", "Cube", "Tetrahedron", "Cloud"];
+    // Select a random weapon from the magic weapons array
+    randomWeapon = weapons[randomNumber(weapons)];
+    P2.setWeapon(new Gauntlet.SpellBook[randomWeapon]());
+  } else {
+    weapons = ["Dagger", "BroadSword", "WarAxe"];
+    // Select a random weapon from the melee weapons array
+    randomWeapon = weapons[randomNumber(weapons)];
+    P2.setWeapon(new Gauntlet.Armory[randomWeapon]());
+  }
+
+  return P2;
+}
+
+// Returns random number between 0 and the length of the passed array
+function randomNumber (array) {
+  return  Math.floor(Math.random() * array.length);
+}
+},{"./app":1,"./classes":2,"./enemies":5,"./spells":7,"./weapons":8}],4:[function(require,module,exports){
+module.exports = doBattle;
+
+function doBattle(P1,P2) {
+  // P1 is the player's character
+  report(`You are ${P1.playerName}, a ${P1.skinColor} skinned ${P1.species} ${P1.class.name} with ${P1.health} health.`);
+  if (P1.class.magical) {
+    report(`${P1.playerName} is able to cast ${P1.weapon.name} of ${P1.weapon.type}!`);
+  } else {
+    report(`${P1.playerName} is wielding a nasty ${P1.weapon.name}!`);
+  }
+  // P2 is the monster
+  report(`Your opponent is ${P2.playerName}, a ${P2.skinColor} skinned ${P2.species} ${P2.class.name} with ${P2.health} health.`);
+  if (P2.class.magical) {
+    report(`${P2.playerName} is able to cast ${P2.weapon.name} of ${P2.weapon.type}!`);
+  } else {
+    report(`${P2.playerName} is wielding a nasty ${P2.weapon.name}!`);
+  }
+
+  report("It's on!!!");
+
+  var playerAttacking = coinFlip() + 1;  // 1 or 2
+  var goesFirst = playerAttacking === 1 ? P1.playerName : P2.playerName;
+
+  report(`${goesFirst} wins the coin flip and will go first.`);
+  report(". . .","center");
+
+  if (playerAttacking === 2) {
+    doAnotherAttack = attack(P2,P1);
+    if (!doAnotherAttack) {
+      gameOver();
+    }
+  }
+
+  // activate listener on "Attack" button
+  $("#attackBtn").on("click",function(){
+    doAnotherAttack = attack(P1,P2);  // player attacks monster
+    if(!doAnotherAttack) {
+      gameOver();
+    } else {
+      doAnotherAttack = attack(P2,P1);  // monster attacks player
+      if(!doAnotherAttack) {
+        gameOver();
+      }
+    }
+  });
+}
+
+function gameOver() {
+  report(" * * * GAME OVER * * *","center");
+  $("#attackBtn").prop("disabled",true);  // disable Attack button
+  $("#attackBtn").off("click");  // turn off event listener
+}
+
+function coinFlip() {
+  return Math.floor(Math.random() * 2);  // 0 or 1
+}
+
+function attack(attacker,defender) {
+  var justification = attacker.playerNum === 1 ? "left" : "right";
+  report(`${attacker.playerName} is attacking ${defender.playerName}.`,justification);
+
+  if (attacker.class.magical) {
+    report(`${attacker.playerName} casts a ${attacker.weapon.name} of ${attacker.weapon.type}...`,justification);
+  } else {
+    report(`${attacker.playerName} lunges with ${attacker.possessivePronoun} ${attacker.weapon.name}...`,justification);
+  }
+
+  // does defender successfully evade?
+  if (rollDice() <= defender.agility) {
+    report(`${defender.playerName} evades the attack!  Zero damage.`,justification);
+    report(". . .","center");  // blank line
+    return true;  // doAnotherAttack = true
+  }
+
+  // defender takes damage
+  var damage = Math.floor(Math.random() * attacker.weapon.damage + 1);  // base damage
+  if (attacker.class.magical) {
+    damage += Math.round(damage * attacker.intelligence / 50);  // damage adjustment
+    report(`and does ${damage} points of damage!`,justification);
+  } else {
+    damage += Math.round(damage * attacker.strength / 50);  // damage adjustment
+    // Get a random index from the limbs array
+    var random = Math.floor(Math.random() * defender.limbs.length);
+    // Get the string at the index
+    var randomLimb = defender.limbs[random];
+    report(`and strikes ${defender.playerName} in the ${randomLimb} for ${damage} points of damage!`,justification);
+  }
+  report(`${defender.playerName} goes from ${defender.health} health to ${defender.health - damage} health.`,justification);
+  report(". . .","center");  // blank line
+  defender.health -= damage;
+  var pct = Math.round(100 * (defender.health / defender.originalHealth));
+  if (pct < 0) {
+    pct = 0;
+  }
+  if (defender.playerNum == 2) {  // defender is monster?
+    $(".monster .bar").css("width",`${pct}%`);
+  } else {
+    $(".human .bar").css("width",`${pct}%`);
+  }
+
+  // did defender die?
+  if (defender.health <= 0) {
+    report(`${attacker.playerName} has defeated ${defender.playerName}!`,"center");
+    return false;  // don't do another attack -- it's over!
+  } else {
+    return true;  // doAnotherAttack = true
+  }
+}
+
+function rollDice() {
+  return Math.floor(Math.random() * 100);  // 0 to 99
+}
+
+function report(text,justification) {
+  if (!justification) {
+    justification = "left";
+  }
+  var oldTxt = $(".combat-log-text").html();
+  $(".combat-log-text").html(oldTxt + `<p style='text-align:${justification}'>${text}</p>`);
+  $(".combat-log").scrollTop($(".combat-log-text").height());
+  console.log(text);
+}
+},{}],5:[function(require,module,exports){
 var Gauntlet = require("./player");
 
 console.log(`enemies Gauntlet test: `, Gauntlet);
@@ -478,10 +609,7 @@ Gauntlet.Combatants.Ogre = function() {
   };
 };
 Gauntlet.Combatants.Ogre.prototype = new Gauntlet.Combatants.Monster();
-},{"./player":4}],4:[function(require,module,exports){
-/*
-  TODO: Modularize this code with IIFE or Browserify
- */
+},{"./player":6}],6:[function(require,module,exports){
 var Gauntlet = Gauntlet || {};
 Gauntlet.GuildHall = require("./classes");
 Gauntlet.Combatants = {};
@@ -489,10 +617,7 @@ console.log(`Gauntlet on player: `, Gauntlet);
 console.log(`GuildHall on player: `, Gauntlet.GuildHall);
 
 module.exports = Gauntlet;
-/*
-  Define the base object for any player of Gauntlet,
-  whether a human player or a monster.
- */
+
 Gauntlet.Combatants.Player = function(name) {
   this.species = null;
   this.class = null;
@@ -521,7 +646,6 @@ Gauntlet.Combatants.Player = function(name) {
       this.health,
       " health. ",
       (this.class.magical) ? "Able to cast " : " Wielding a ",
-      // this.weapon.toString(),
       "!"
     ].join("");
     return output;
@@ -551,29 +675,16 @@ Gauntlet.Combatants.Player.prototype.generateClass = function() {
   return this.class;
 };
 
-/*
-  Define the base properties for a human in a
-  constructor function.
- */
 Gauntlet.Combatants.Human = function() {
   var randomSkin;
 
   this.species = "Human";
   this.intelligence = this.intelligence + 20;
 
-  // this.skinColors.push("brown", "red", "white", "disease");
-  // randomSkin = Math.round(Math.random() * (this.skinColors.length-1));
-  // this.skinColor = this.skinColors[randomSkin];
-
   this.allowedClasses = ["Warrior", "Berserker", "Wizard", "Monk", "Ninja", "Thief", "Sorcerer"];
 };
 Gauntlet.Combatants.Human.prototype = new Gauntlet.Combatants.Player();
 
-
-/*
-  Define the base properties for a monster in a
-  constructor function.
- */
 Gauntlet.Combatants.Monster = function() {
   this.health = this.health - 30;
   this.intelligence = this.intelligence -20;
@@ -581,7 +692,7 @@ Gauntlet.Combatants.Monster = function() {
 };
 
 Gauntlet.Combatants.Monster.prototype = new Gauntlet.Combatants.Player();
-},{"./classes":2}],5:[function(require,module,exports){
+},{"./classes":2}],7:[function(require,module,exports){
 /*
   TODO: Modularize this code with IIFE or Browserify
  */
@@ -652,7 +763,7 @@ Gauntlet.SpellBook.Cloud = function() {
   this.type = this.damageTypes[random];
 };
 Gauntlet.SpellBook.Cloud.prototype = new Gauntlet.SpellBook.Spell();
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 
 var Gauntlet = Gauntlet || {};
 Gauntlet.Armory = {};
