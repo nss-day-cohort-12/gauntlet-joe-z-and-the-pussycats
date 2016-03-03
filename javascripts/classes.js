@@ -1,7 +1,6 @@
-/*
-  TODO: Modularize this code with IIFE or Browserify
- */
-var Gauntlet = Gauntlet || {};
+'use strict';
+
+let Gauntlet = {};
 Gauntlet.GuildHall = {};
 
 module.exports = Gauntlet.GuildHall;
@@ -22,13 +21,6 @@ Gauntlet.GuildHall.PlayerClass = function() {
   };
 };
 
-/*
-    FIGHTER CLASSES
-      - Warrior
-      - Valkyrie
-      - Berserker
-      - Monk
- */
 Gauntlet.GuildHall.Fighter = function() {
   this.healthBonus = 20;
   this.strengthBonus = 10;
@@ -37,7 +29,6 @@ Gauntlet.GuildHall.Fighter.prototype = new Gauntlet.GuildHall.PlayerClass();
 
 
 Gauntlet.GuildHall.Warrior = function() {
-  console.log(`test warrior created`);
   this.name = "Warrior";
   this.healthBonus = this.healthBonus + 25;
   this.strengthBonus = this.strengthBonus + 30;
@@ -68,14 +59,6 @@ Gauntlet.GuildHall.Monk = function() {
 };
 Gauntlet.GuildHall.Monk.prototype = new Gauntlet.GuildHall.Fighter();
 
-
-/*
-    MAGICAL CLASSES
-      - Shaman
-      - Wizard
-      - Conujurer
-      - Sorcerer
- */
 Gauntlet.GuildHall.Mage = function() {
   this.name = "Mage";
   this.magical = true;
@@ -119,14 +102,6 @@ Gauntlet.GuildHall.Sorcerer = function() {
   this.intelligenceBonus = this.intelligenceBonus + 30;
 };
 Gauntlet.GuildHall.Sorcerer.prototype = new Gauntlet.GuildHall.Mage();
-
-
-/*
-    STEALTH CLASSES
-      - Thief
-      - Ninja
-      - Assassin
- */
 
 Gauntlet.GuildHall.Eluder = function() {
   this.name = "Eluder";

@@ -1,5 +1,6 @@
+'use strict';
 
-var Gauntlet = Gauntlet || {};
+let Gauntlet = {};
 Gauntlet.Armory = {};
 
 Gauntlet.Armory.Weapon = function() {

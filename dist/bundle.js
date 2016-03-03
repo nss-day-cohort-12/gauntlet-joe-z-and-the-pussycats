@@ -1,11 +1,13 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-// declare global variables that will be used in player constructor
-var playerName;
-var playerClass;
-var playerWeapon;
-var P1,P2;
+'use strict';
 
-var Gauntlet = {};
+// declare global variables that will be used in player constructor
+let playerName;
+let playerClass;
+let playerWeapon;
+let P1,P2;
+
+let Gauntlet = {};
 
 Gauntlet.Armory = require('./weapons');
 console.log(`Armory Test: `, Gauntlet.Armory);
@@ -17,8 +19,8 @@ console.log(`GuildHall Test: `, Gauntlet.GuildHall);
 Gauntlet.Combatants = require('./enemies');
 console.log(`Combatants Test: `, Gauntlet.Combatants);
 
-var createMonster = require('./createMonster');
-var doBattle = require('./doBattle');
+let createMonster = require('./createMonster');
+let doBattle = require('./doBattle');
 
 console.log(`Gauntlet on app.js : `, Gauntlet);
 
@@ -35,8 +37,8 @@ $(document).ready(function() {
     move on to the next view.
    */
   $(".card__link").click(function(e) {
-    var nextCard = $(this).attr("next");
-    var moveAlong = false;
+    let nextCard = $(this).attr("next");
+    let moveAlong = false;
 
     switch (nextCard) {
       case "card--class":
@@ -59,8 +61,8 @@ $(document).ready(function() {
       P1 = new Gauntlet.Combatants.Human();
       $(".class").hide();
       $("#surprise").show();
-      for (var i = 0; i < P1.allowedClasses.length; i++) {
-        currClass = P1.allowedClasses[i].toLowerCase();
+      for (let i = 0; i < P1.allowedClasses.length; i++) {
+        let currClass = P1.allowedClasses[i].toLowerCase();
         if ($(`.card__button#${currClass}`)) {
           $(`.card__button#${currClass}`).show();
         }
@@ -96,7 +98,7 @@ $(document).ready(function() {
     When the back button clicked, move back a view
    */
   $(".card__back").click(function(e) {
-    var previousCard = $(this).attr("previous");
+    let previousCard = $(this).attr("previous");
     $(".card").hide();
     $("." + previousCard).show();
   });
@@ -180,7 +182,7 @@ $(document).ready(function() {
 function fillPlayers() {
   $(".human h2").html(P1.playerName);
   $(".monster h2").html(P2.playerName);
-  var desc = `A ${P1.skinColor} skinned ${P1.species} ${P1.class.name} with ${P1.health} health.`;
+  let desc = `A ${P1.skinColor} skinned ${P1.species} ${P1.class.name} with ${P1.health} health.`;
   if (P1.class.magical) {
     desc += ` Able to cast ${P1.weapon.name} of ${P1.weapon.type}!`;
   } else {
@@ -202,10 +204,9 @@ function fillPlayers() {
   $(".monster .stat3").html("Agil: " + P2.agility);
 }
 },{"./classes":2,"./createMonster":3,"./doBattle":4,"./enemies":5,"./spells":7,"./weapons":8}],2:[function(require,module,exports){
-/*
-  TODO: Modularize this code with IIFE or Browserify
- */
-var Gauntlet = Gauntlet || {};
+'use strict';
+
+let Gauntlet = {};
 Gauntlet.GuildHall = {};
 
 module.exports = Gauntlet.GuildHall;
@@ -226,13 +227,6 @@ Gauntlet.GuildHall.PlayerClass = function() {
   };
 };
 
-/*
-    FIGHTER CLASSES
-      - Warrior
-      - Valkyrie
-      - Berserker
-      - Monk
- */
 Gauntlet.GuildHall.Fighter = function() {
   this.healthBonus = 20;
   this.strengthBonus = 10;
@@ -241,7 +235,6 @@ Gauntlet.GuildHall.Fighter.prototype = new Gauntlet.GuildHall.PlayerClass();
 
 
 Gauntlet.GuildHall.Warrior = function() {
-  console.log(`test warrior created`);
   this.name = "Warrior";
   this.healthBonus = this.healthBonus + 25;
   this.strengthBonus = this.strengthBonus + 30;
@@ -272,14 +265,6 @@ Gauntlet.GuildHall.Monk = function() {
 };
 Gauntlet.GuildHall.Monk.prototype = new Gauntlet.GuildHall.Fighter();
 
-
-/*
-    MAGICAL CLASSES
-      - Shaman
-      - Wizard
-      - Conujurer
-      - Sorcerer
- */
 Gauntlet.GuildHall.Mage = function() {
   this.name = "Mage";
   this.magical = true;
@@ -324,14 +309,6 @@ Gauntlet.GuildHall.Sorcerer = function() {
 };
 Gauntlet.GuildHall.Sorcerer.prototype = new Gauntlet.GuildHall.Mage();
 
-
-/*
-    STEALTH CLASSES
-      - Thief
-      - Ninja
-      - Assassin
- */
-
 Gauntlet.GuildHall.Eluder = function() {
   this.name = "Eluder";
   this.magical = false;
@@ -368,9 +345,9 @@ Gauntlet.GuildHall.Assassin.prototype = new Gauntlet.GuildHall.Eluder();
 
 
 },{}],3:[function(require,module,exports){
-// createMonster()
+'use strict';
 
-var Gauntlet = require("./app");
+let Gauntlet = require("./app");
 Gauntlet.Armory = require('./weapons');
 Gauntlet.SpellBook = require('./spells');
 Gauntlet.GuildHall = require('./classes');
@@ -382,10 +359,10 @@ module.exports = createMonster;
 
 function createMonster() {
   // create P2, a monster, randomly
-  var monsters = ["Orc", "Hobgoblin", "Ogre"];
+  let monsters = ["Orc", "Hobgoblin", "Ogre"];
   // Create a new random monster from the monsters array
-  var P2 = new Gauntlet.Combatants[monsters[randomNumber(monsters)]]();
-  var monsterNames = [{name:"Pauly Shore",       possessivePronoun:"his"},
+  let P2 = new Gauntlet.Combatants[monsters[randomNumber(monsters)]]();
+  let monsterNames = [{name:"Pauly Shore",       possessivePronoun:"his"},
                       {name:"Elvira",            possessivePronoun:"her"},
                       {name:"Stephen Baldwin",   possessivePronoun:"his"},
                       {name:"Gary Busey",        possessivePronoun:"his"},
@@ -395,12 +372,12 @@ function createMonster() {
                       {name:"Amy Winehouse",     possessivePronoun:"her"},
                       {name:"William Shatner",   possessivePronoun:"his"} ];
   // Get the string at the index
-  var monsterNum = randomNumber(monsterNames);
+  let monsterNum = randomNumber(monsterNames);
   P2.playerName = monsterNames[monsterNum].name;
   P2.possessivePronoun = monsterNames[monsterNum].possessivePronoun;
   P2.class = P2.generateClass();
 
-  var weapons, randomWeapon;
+  let weapons, randomWeapon;
 
   // assign P2 a random weapon or spell
   if (P2.class.magical) {
@@ -423,6 +400,8 @@ function randomNumber (array) {
   return  Math.floor(Math.random() * array.length);
 }
 },{"./app":1,"./classes":2,"./enemies":5,"./spells":7,"./weapons":8}],4:[function(require,module,exports){
+'use strict';
+
 module.exports = doBattle;
 
 function doBattle(P1,P2) {
@@ -443,8 +422,9 @@ function doBattle(P1,P2) {
 
   report("It's on!!!");
 
-  var playerAttacking = coinFlip() + 1;  // 1 or 2
-  var goesFirst = playerAttacking === 1 ? P1.playerName : P2.playerName;
+  let playerAttacking = coinFlip() + 1;  // 1 or 2
+  let goesFirst = playerAttacking === 1 ? P1.playerName : P2.playerName;
+  let doAnotherAttack;
 
   report(`${goesFirst} wins the coin flip and will go first.`);
   report(". . .","center");
@@ -481,7 +461,7 @@ function coinFlip() {
 }
 
 function attack(attacker,defender) {
-  var justification = attacker.playerNum === 1 ? "left" : "right";
+  let justification = attacker.playerNum === 1 ? "left" : "right";
   report(`${attacker.playerName} is attacking ${defender.playerName}.`,justification);
 
   if (attacker.class.magical) {
@@ -498,22 +478,22 @@ function attack(attacker,defender) {
   }
 
   // defender takes damage
-  var damage = Math.floor(Math.random() * attacker.weapon.damage + 1);  // base damage
+  let damage = Math.floor(Math.random() * attacker.weapon.damage + 1);  // base damage
   if (attacker.class.magical) {
     damage += Math.round(damage * attacker.intelligence / 50);  // damage adjustment
     report(`and does ${damage} points of damage!`,justification);
   } else {
     damage += Math.round(damage * attacker.strength / 50);  // damage adjustment
     // Get a random index from the limbs array
-    var random = Math.floor(Math.random() * defender.limbs.length);
+    let random = Math.floor(Math.random() * defender.limbs.length);
     // Get the string at the index
-    var randomLimb = defender.limbs[random];
+    let randomLimb = defender.limbs[random];
     report(`and strikes ${defender.playerName} in the ${randomLimb} for ${damage} points of damage!`,justification);
   }
   report(`${defender.playerName} goes from ${defender.health} health to ${defender.health - damage} health.`,justification);
   report(". . .","center");  // blank line
   defender.health -= damage;
-  var pct = Math.round(100 * (defender.health / defender.originalHealth));
+  let pct = Math.round(100 * (defender.health / defender.originalHealth));
   if (pct < 0) {
     pct = 0;
   }
@@ -540,13 +520,15 @@ function report(text,justification) {
   if (!justification) {
     justification = "left";
   }
-  var oldTxt = $(".combat-log-text").html();
+  let oldTxt = $(".combat-log-text").html();
   $(".combat-log-text").html(oldTxt + `<p style='text-align:${justification}'>${text}</p>`);
   $(".combat-log").scrollTop($(".combat-log-text").height());
   console.log(text);
 }
 },{}],5:[function(require,module,exports){
-var Gauntlet = require("./player");
+'use strict';
+
+let Gauntlet = require("./player");
 
 console.log(`enemies Gauntlet test: `, Gauntlet);
 module.exports = Gauntlet.Combatants;
@@ -558,10 +540,10 @@ Gauntlet.Combatants.Orc = function() {
 
   this.generateClass = function() {
     // Get a random index from the allowed classes array
-    var random = Math.round(Math.random() * (this.allowedClasses.length - 1));
+    let random = Math.round(Math.random() * (this.allowedClasses.length - 1));
 
     // Get the string at the index
-    var randomClass = this.allowedClasses[random];
+    let randomClass = this.allowedClasses[random];
 
     // Composes the corresponding player class into the player object
     this.class = new Gauntlet.GuildHall[randomClass]();
@@ -578,10 +560,10 @@ Gauntlet.Combatants.Hobgoblin = function() {
 
   this.generateClass = function() {
     // Get a random index from the allowed classes array
-    var random = Math.round(Math.random() * (this.allowedClasses.length - 1));
+    let random = Math.round(Math.random() * (this.allowedClasses.length - 1));
 
     // Get the string at the index
-    var randomClass = this.allowedClasses[random];
+    let randomClass = this.allowedClasses[random];
 
     // Composes the corresponding player class into the player object
     this.class = new Gauntlet.GuildHall[randomClass]();
@@ -598,10 +580,10 @@ Gauntlet.Combatants.Ogre = function() {
 
   this.generateClass = function() {
     // Get a random index from the allowed classes array
-    var random = Math.round(Math.random() * (this.allowedClasses.length - 1));
+    let random = Math.round(Math.random() * (this.allowedClasses.length - 1));
 
     // Get the string at the index
-    var randomClass = this.allowedClasses[random];
+    let randomClass = this.allowedClasses[random];
 
     // Composes the corresponding player class into the player object
     this.class = new Gauntlet.GuildHall[randomClass]();
@@ -610,7 +592,9 @@ Gauntlet.Combatants.Ogre = function() {
 };
 Gauntlet.Combatants.Ogre.prototype = new Gauntlet.Combatants.Monster();
 },{"./player":6}],6:[function(require,module,exports){
-var Gauntlet = Gauntlet || {};
+'use strict';
+
+let Gauntlet = {};
 Gauntlet.GuildHall = require("./classes");
 Gauntlet.Combatants = {};
 console.log(`Gauntlet on player: `, Gauntlet);
@@ -628,14 +612,14 @@ Gauntlet.Combatants.Player = function(name) {
   this.limbs = ["head", "neck", "arm", "leg", "torso"];
   this.skinColors = ["goldenrod", "cornflowerBlue", "chartreuse", "salmon", "lawnGreen", "fuchsia", "azure", "ghostWhite", "honeydew"];
   // Get a random index from the skinColors array
-  var random = Math.floor(Math.random() * this.skinColors.length);
+  let random = Math.floor(Math.random() * this.skinColors.length);
   // Get the string at the index
   this.skinColor = this.skinColors[random];
   this.strength = 90;
   this.intelligence = 90;
   this.agility = 50;
   this.toString = function() {
-    var output = [this.playerName,
+    let output = [this.playerName,
       ": a ",
       this.skinColor,
       " skinned ",
@@ -658,10 +642,10 @@ Gauntlet.Combatants.Player.prototype.setWeapon = function(newWeapon) {
 
 Gauntlet.Combatants.Player.prototype.generateClass = function() {
   // Get a random index from the allowed classes array
-  var random = Math.round(Math.random() * (this.allowedClasses.length - 1));
+  let random = Math.round(Math.random() * (this.allowedClasses.length - 1));
 
   // Get the string at the index
-  var randomClass = this.allowedClasses[random];
+  let randomClass = this.allowedClasses[random];
 
   // Composes the corresponding player class into the player object
   this.class = new Gauntlet.GuildHall[randomClass]();
@@ -676,7 +660,7 @@ Gauntlet.Combatants.Player.prototype.generateClass = function() {
 };
 
 Gauntlet.Combatants.Human = function() {
-  var randomSkin;
+  let randomSkin;
 
   this.species = "Human";
   this.intelligence = this.intelligence + 20;
@@ -693,10 +677,9 @@ Gauntlet.Combatants.Monster = function() {
 
 Gauntlet.Combatants.Monster.prototype = new Gauntlet.Combatants.Player();
 },{"./classes":2}],7:[function(require,module,exports){
-/*
-  TODO: Modularize this code with IIFE or Browserify
- */
-var Gauntlet = Gauntlet || {};
+'use strict';
+
+let Gauntlet = {};
 Gauntlet.SpellBook = {};
 
 module.exports = Gauntlet.SpellBook;
@@ -724,7 +707,7 @@ Gauntlet.SpellBook.Sphere = function() {
   this.name = "sphere";
   this.damage = Math.floor(Math.random() * 10 + 10);
 
-  var random = Math.round(Math.random() * (this.damageTypes.length - 1));
+  let random = Math.round(Math.random() * (this.damageTypes.length - 1));
   this.type = this.damageTypes[random];
 };
 Gauntlet.SpellBook.Sphere.prototype = new Gauntlet.SpellBook.Spell();
@@ -736,7 +719,7 @@ Gauntlet.SpellBook.Cube = function() {
   this.name = "cube";
   this.damage = Math.floor(Math.random() * 11 + 10);
 
-  var random = Math.round(Math.random() * (this.damageTypes.length - 1));
+  let random = Math.round(Math.random() * (this.damageTypes.length - 1));
   this.type = this.damageTypes[random];
 };
 Gauntlet.SpellBook.Cube.prototype = new Gauntlet.SpellBook.Spell();
@@ -747,7 +730,7 @@ Gauntlet.SpellBook.Tetrahedron = function() {
   this.name = "tetrahedron";
   this.damage = Math.floor(Math.random() * 12 + 10);
 
-  var random = Math.round(Math.random() * (this.damageTypes.length - 1));
+  let random = Math.round(Math.random() * (this.damageTypes.length - 1));
   this.type = this.damageTypes[random];
 };
 Gauntlet.SpellBook.Tetrahedron.prototype = new Gauntlet.SpellBook.Spell();
@@ -759,13 +742,14 @@ Gauntlet.SpellBook.Cloud = function() {
   this.name = "cloud";
   this.damage = Math.floor(Math.random() * 13 + 10);
 
-  var random = Math.round(Math.random() * (this.damageTypes.length - 1));
+  let random = Math.round(Math.random() * (this.damageTypes.length - 1));
   this.type = this.damageTypes[random];
 };
 Gauntlet.SpellBook.Cloud.prototype = new Gauntlet.SpellBook.Spell();
 },{}],8:[function(require,module,exports){
+'use strict';
 
-var Gauntlet = Gauntlet || {};
+let Gauntlet = {};
 Gauntlet.Armory = {};
 
 Gauntlet.Armory.Weapon = function() {
