@@ -2,8 +2,12 @@
   TODO: Modularize this code with IIFE or Browserify
  */
 var Gauntlet = Gauntlet || {};
+Gauntlet.GuildHall = require("./classes");
 Gauntlet.Combatants = {};
+console.log(`Gauntlet on player: `, Gauntlet);
+console.log(`GuildHall on player: `, Gauntlet.GuildHall);
 
+module.exports = Gauntlet;
 /*
   Define the base object for any player of Gauntlet,
   whether a human player or a monster.
@@ -45,7 +49,7 @@ Gauntlet.Combatants.Player = function(name) {
 
 Gauntlet.Combatants.Player.prototype.setWeapon = function(newWeapon) {
   this.weapon = newWeapon;
-}
+};
 
 Gauntlet.Combatants.Player.prototype.generateClass = function() {
   // Get a random index from the allowed classes array

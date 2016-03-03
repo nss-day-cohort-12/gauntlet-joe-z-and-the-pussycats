@@ -4,6 +4,8 @@
 var Gauntlet = Gauntlet || {};
 Gauntlet.GuildHall = {};
 
+module.exports = Gauntlet.GuildHall;
+
 /*
   Base function for a player, or enemy, class (profession)
  */
@@ -17,7 +19,7 @@ Gauntlet.GuildHall.PlayerClass = function() {
 
   this.toString = function() {
     return this.name;
-  }
+  };
 };
 
 /*
@@ -35,6 +37,7 @@ Gauntlet.GuildHall.Fighter.prototype = new Gauntlet.GuildHall.PlayerClass();
 
 
 Gauntlet.GuildHall.Warrior = function() {
+  console.log(`test warrior created`);
   this.name = "Warrior";
   this.healthBonus = this.healthBonus + 25;
   this.strengthBonus = this.strengthBonus + 30;
