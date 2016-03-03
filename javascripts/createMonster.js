@@ -1,6 +1,6 @@
-// createMonster()
+'use strict';
 
-var Gauntlet = require("./app");
+let Gauntlet = require("./app");
 Gauntlet.Armory = require('./weapons');
 Gauntlet.SpellBook = require('./spells');
 Gauntlet.GuildHall = require('./classes');
@@ -12,10 +12,10 @@ module.exports = createMonster;
 
 function createMonster() {
   // create P2, a monster, randomly
-  var monsters = ["Orc", "Hobgoblin", "Ogre"];
+  let monsters = ["Orc", "Hobgoblin", "Ogre"];
   // Create a new random monster from the monsters array
-  var P2 = new Gauntlet.Combatants[monsters[randomNumber(monsters)]]();
-  var monsterNames = [{name:"Pauly Shore",       possessivePronoun:"his"},
+  let P2 = new Gauntlet.Combatants[monsters[randomNumber(monsters)]]();
+  let monsterNames = [{name:"Pauly Shore",       possessivePronoun:"his"},
                       {name:"Elvira",            possessivePronoun:"her"},
                       {name:"Stephen Baldwin",   possessivePronoun:"his"},
                       {name:"Gary Busey",        possessivePronoun:"his"},
@@ -25,12 +25,12 @@ function createMonster() {
                       {name:"Amy Winehouse",     possessivePronoun:"her"},
                       {name:"William Shatner",   possessivePronoun:"his"} ];
   // Get the string at the index
-  var monsterNum = randomNumber(monsterNames);
+  let monsterNum = randomNumber(monsterNames);
   P2.playerName = monsterNames[monsterNum].name;
   P2.possessivePronoun = monsterNames[monsterNum].possessivePronoun;
   P2.class = P2.generateClass();
 
-  var weapons, randomWeapon;
+  let weapons, randomWeapon;
 
   // assign P2 a random weapon or spell
   if (P2.class.magical) {

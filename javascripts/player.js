@@ -1,4 +1,6 @@
-var Gauntlet = Gauntlet || {};
+'use strict';
+
+let Gauntlet = {};
 Gauntlet.GuildHall = require("./classes");
 Gauntlet.Combatants = {};
 console.log(`Gauntlet on player: `, Gauntlet);
@@ -16,14 +18,14 @@ Gauntlet.Combatants.Player = function(name) {
   this.limbs = ["head", "neck", "arm", "leg", "torso"];
   this.skinColors = ["goldenrod", "cornflowerBlue", "chartreuse", "salmon", "lawnGreen", "fuchsia", "azure", "ghostWhite", "honeydew"];
   // Get a random index from the skinColors array
-  var random = Math.floor(Math.random() * this.skinColors.length);
+  let random = Math.floor(Math.random() * this.skinColors.length);
   // Get the string at the index
   this.skinColor = this.skinColors[random];
   this.strength = 90;
   this.intelligence = 90;
   this.agility = 50;
   this.toString = function() {
-    var output = [this.playerName,
+    let output = [this.playerName,
       ": a ",
       this.skinColor,
       " skinned ",
@@ -46,10 +48,10 @@ Gauntlet.Combatants.Player.prototype.setWeapon = function(newWeapon) {
 
 Gauntlet.Combatants.Player.prototype.generateClass = function() {
   // Get a random index from the allowed classes array
-  var random = Math.round(Math.random() * (this.allowedClasses.length - 1));
+  let random = Math.round(Math.random() * (this.allowedClasses.length - 1));
 
   // Get the string at the index
-  var randomClass = this.allowedClasses[random];
+  let randomClass = this.allowedClasses[random];
 
   // Composes the corresponding player class into the player object
   this.class = new Gauntlet.GuildHall[randomClass]();
@@ -64,7 +66,7 @@ Gauntlet.Combatants.Player.prototype.generateClass = function() {
 };
 
 Gauntlet.Combatants.Human = function() {
-  var randomSkin;
+  let randomSkin;
 
   this.species = "Human";
   this.intelligence = this.intelligence + 20;
