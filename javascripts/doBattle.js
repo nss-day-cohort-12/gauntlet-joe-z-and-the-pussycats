@@ -17,21 +17,39 @@ function doBattle(P1,P2) {
   report("It's on!!!");
 
   var playerAttacking = coinFlip() + 1;  // 1 or 2
+  if (playerAttacking === 1) {
+    var goesFirst = P1.playerName;
+  } else {
+    var goesFirst = P2.playerName;
+  }
+  report(`${goesFirst} wins the coin flip and will go first.`);
+  report(". . .","center");
 
-  report(`Player ${playerAttacking} wins the coin flip and will go first.`);
-
-  var doAnotherAttack = true;
-  while (doAnotherAttack) {
-    if (playerAttacking === 1) {
-      doAnotherAttack = attack(P1,P2);
-      playerAttacking = 2;
-    } else {
-      doAnotherAttack = attack(P2,P1);
-      playerAttacking = 1;
+  if (playerAttacking === 2) {
+    doAnotherAttack = attack(P2,P1)
+    if (!doAnotherAttack) {
+      gameOver();
     }
   }
 
-  // battle complete
+  // activate listener on "Attack" button
+  $("#attackBtn").on("click",function(){
+    doAnotherAttack = attack(P1,P2);  // player attacks monster
+    if(!doAnotherAttack) {
+      gameOver();
+    } else {
+      doAnotherAttack = attack(P2,P1);  // monster attacks player
+      if(!doAnotherAttack) {
+        gameOver();
+      }
+    }
+  });
+}
+
+function gameOver() {
+  report(" * * * GAME OVER * * *","center");
+  $("#attackBtn").prop("disabled",true);  // disable Attack button
+  $("#attackBtn").off("click");  // turn off event listener
 }
 
 function coinFlip() {
@@ -39,18 +57,23 @@ function coinFlip() {
 }
 
 function attack(attacker,defender) {
-
-  report(`${attacker.playerName} is attacking ${defender.playerName}.`);
+  if (attacker.playerNum === 1) {
+    var justification = "left";
+  } else {
+    var justification = "right";
+  }
+  report(`${attacker.playerName} is attacking ${defender.playerName}.`,justification);
 
   if (attacker.class.magical) {
-    report(`${attacker.playerName} casts a ${attacker.weapon.name} of ${attacker.weapon.type}...`);
+    report(`${attacker.playerName} casts a ${attacker.weapon.name} of ${attacker.weapon.type}...`,justification);
   } else {
-    report(`${attacker.playerName} lunges with ${attacker.possessivePronoun} ${attacker.weapon.name}...`);
+    report(`${attacker.playerName} lunges with ${attacker.possessivePronoun} ${attacker.weapon.name}...`,justification);
   }
 
   // does defender successfully evade?
   if (rollDice() <= defender.agility) {
-    report(`${defender.playerName} evades the attack!  Zero damage.`);
+    report(`${defender.playerName} evades the attack!  Zero damage.`,justification);
+    report(". . .","center");  // blank line
     return true;  // doAnotherAttack = true
   }
 
@@ -58,30 +81,31 @@ function attack(attacker,defender) {
   var damage = Math.floor(Math.random() * attacker.weapon.damage + 1);  // base damage
   if (attacker.class.magical) {
     damage += Math.round(damage * attacker.intelligence / 50);  // damage adjustment
-    report(`and does ${damage} points of damage!`);
+    report(`and does ${damage} points of damage!`,justification);
   } else {
     damage += Math.round(damage * attacker.strength / 50);  // damage adjustment
     // Get a random index from the limbs array
     var random = Math.floor(Math.random() * defender.limbs.length);
     // Get the string at the index
     var randomLimb = defender.limbs[random];
-    report(`and strikes ${defender.playerName} in the ${randomLimb} for ${damage} points of damage!`);
+    report(`and strikes ${defender.playerName} in the ${randomLimb} for ${damage} points of damage!`,justification);
   }
-  report(`${defender.playerName} goes from ${defender.health} health to ${defender.health - damage} health.`);
+  report(`${defender.playerName} goes from ${defender.health} health to ${defender.health - damage} health.`,justification);
+  report(". . .","center");  // blank line
   defender.health -= damage;
-  var pct = 100 - Math.round(100 * (defender.health / defender.originalHealth));
-  if (pct > 100) {
-    pct = 100;
+  var pct = Math.round(100 * (defender.health / defender.originalHealth));
+  if (pct < 0) {
+    pct = 0;
   }
-  if (defender.playerName == P2.playerName) {  // defender is monster?
-    $(".monster .hit").css("width",`${pct}%`);
+  if (defender.playerNum == 2) {  // defender is monster?
+    $(".monster .bar").css("width",`${pct}%`);
   } else {
-    $(".human .hit").css("width",`${pct}%`);
+    $(".human .bar").css("width",`${pct}%`);
   }
 
   // did defender die?
   if (defender.health <= 0) {
-    report(`${attacker.playerName} has defeated ${defender.playerName}!`);
+    report(`${attacker.playerName} has defeated ${defender.playerName}!`,"center");
     return false;  // don't do another attack -- it's over!
   } else {
     return true;  // doAnotherAttack = true
@@ -92,8 +116,12 @@ function rollDice() {
   return Math.floor(Math.random() * 100);  // 0 to 99
 }
 
-function report(text) {
-  // in final version, supplement this function with output to DOM element
+function report(text,justification) {
+  if (!justification) {
+    justification = "left";
+  }
+  var oldTxt = $(".combat-log-text").html();
+  $(".combat-log-text").html(oldTxt + `<p style='text-align:${justification}'>${text}</p>`);
+  $(".combat-log").scrollTop($(".combat-log-text").height());
   console.log(text);
 }
-
