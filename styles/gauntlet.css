@@ -75,6 +75,7 @@ img {
   border-radius: 10px;
   position: relative;
 }
+
 .bar {
   background: #62F062;
   width: 100%;
@@ -180,4 +181,15 @@ img {
 .btn__text {
   padding: 0 50px 0 20px;
   border-radius: 0 5px 5px 0;
+}
+
+.combat-log {
+  height: 400px;
+  overflow: auto;
+}
+
+.combat-log p {
+  margin: 0;
+  padding: 0;
+  font-size: 0.6em;
 }
